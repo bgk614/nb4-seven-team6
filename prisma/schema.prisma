@@ -13,11 +13,13 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 enum BadgeType {
   LIKE_100
   PARTICIPATION_10
   RECORD_100
 }
+
 model Group {
   id                 Int      @id @default(autoincrement())
   name               String
@@ -35,7 +37,7 @@ model Group {
   participants Participant[]
   tags         Tag[]
   badges       Badge[]
-records     Records[]  // 그룹 전체 운동 기록 Badge수여할때 필요한 정보
+  // records     Records[]  // 그룹 전체 운동 기록 Badge수여할때 필요한 정보, record 모델이 없어서 에러 발생 => 모델 생성 전까지 주석 처리
 }
 
 model Participant {
@@ -46,7 +48,7 @@ model Participant {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  group Group   @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  group      Group   @relation(fields: [groupId], references: [id], onDelete: Cascade)
   ownedGroup Group[] @relation("GroupOwner")
 
   @@unique([groupId, nickname]) // 그룹 내 닉네임 중복 방지
