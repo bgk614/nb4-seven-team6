@@ -13,7 +13,11 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
+enum BadgeType {
+  LIKE_100
+  PARTICIPATION_10
+  RECORD_100
+}
 model Group {
   id                 Int      @id @default(autoincrement())
   name               String
