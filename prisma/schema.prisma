@@ -27,7 +27,7 @@ model Group {
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
 
-  owner        Participant   @relation("GroupOwner", fields: [ownerParticipantId], references: [id])
+  owner        Participant   @relation("GroupOwner", fields: [ownerParticipantId], references: [id], onDelete: Restrict)
   participants Participant[]
   tags         Tag[]
   badges       Badge[]
