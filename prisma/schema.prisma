@@ -23,11 +23,11 @@ enum BadgeType {
 model Group {
   id                 Int      @id @default(autoincrement())
   name               String
-  description        String?
+  description        String
   photoUrl           String?
   goalRep            Int      @default(0)
-  discordWebhookUrl  String?
-  discordInviteUrl   String?
+  discordWebhookUrl  String
+  discordInviteUrl   String
   likeCount          Int      @default(0)
   ownerParticipantId Int // 오너는 Participant 중 한 명
   createdAt          DateTime @default(now())
