@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+  // output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -29,11 +29,11 @@ model Group {
   discordWebhookUrl  String
   discordInviteUrl   String
   likeCount          Int      @default(0)
-  ownerParticipantId Int // 오너는 Participant 중 한 명
+  ownerParticipantId Int? // 오너는 Participant 중 한 명
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
 
-  owner        Participant   @relation("GroupOwner", fields: [ownerParticipantId], references: [id], onDelete: Restrict)
+  owner        Participant?  @relation("GroupOwner", fields: [ownerParticipantId], references: [id], onDelete: Restrict)
   participants Participant[]
   tags         Tag[]
   badges       Badge[]
@@ -62,7 +62,7 @@ model Tag {
 }
 
 model Badge {
-  id     Int     @id @default(autoincrement())
-  type   BadgeType @unique // enum 값과 연결
+  id     Int       @id @default(autoincrement())
+  name   BadgeType @unique // enum 값과 연결
   groups Group[]
 }
