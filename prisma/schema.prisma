@@ -13,3 +13,75 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum BadgeType {
+  LIKE_100
+  PARTICIPATION_10
+  RECORD_100
+}
+
+enum RecordType {
+  RUN
+  BIKE
+  SWIM
+}
+
+model Group {
+  id                Int             @id @default(autoincrement())
+  ownerParticipantId Int?
+  name              String
+  description       String
+  photoUrl          String?
+  goalRep           Int
+  discordWebhookUrl String?
+  discordInviteUrl  String?
+  likeCount         Int             @default(0)
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  participants      Participant[]
+  records           Record[]
+  badges            Badge[]
+
+  @@index([name])
+}
+
+model Participant {
+  id         Int       @id @default(autoincrement())
+  groupId    Int
+  nickname   String
+  password   String
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+
+  group      Group     @relation(fields: [groupId], references: [id])
+  records    Record[]
+
+  @@unique([groupId, nickname], name: "groupId_nickname")
+}
+
+model Record {
+  id            Int        @id @default(autoincrement())
+  groupId       Int
+  participantId Int
+  type          RecordType
+  description   String?
+  timeSec       Int
+  distanceM     Int?
+  photos        String[]
+  createdAt     DateTime   @default(now())
+
+  group         Group      @relation(fields: [groupId], references: [id])
+  participant   Participant @relation(fields: [participantId], references: [id])
+
+  @@index([groupId])
+  @@index([participantId])
+}
+
+model Badge {
+  id    Int       @id @default(autoincrement())
+  name  BadgeType @unique
+  label String
+  
+  groups Group[]
+}
