@@ -3,4 +3,8 @@ node_modules/
 .env
 test
 .env.claude/
+.env
+uploads/
+.DS_Store
+.vscode/
 package-lock.json

@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2022", // 최신 문법 지원 + 대부분 환경 호환
+    "module": "ESNext", // ESM 방식(현대 표준 모듈 시스템)
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "rootDir": "src",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "types": ["node"],
+    "resolveJsonModule": true
+  }
+}
