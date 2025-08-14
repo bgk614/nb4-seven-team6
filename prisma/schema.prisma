@@ -27,37 +27,41 @@ enum RecordType {
 }
 
 model Group {
-  id                Int             @id @default(autoincrement())
+  id                 Int             @id @default(autoincrement())
   ownerParticipantId Int?
-  name              String
-  description       String
-  photoUrl          String?
-  goalRep           Int
-  discordWebhookUrl String?
-  discordInviteUrl  String?
-  likeCount         Int             @default(0)
-  createdAt         DateTime        @default(now())
-  updatedAt         DateTime        @updatedAt
+  name               String
+  description        String
+  photoUrl           String?
+  goalRep            Int
+  discordWebhookUrl  String
+  discordInviteUrl   String
+  likeCount          Int             @default(0)
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
 
-  participants      Participant[]
-  records           Record[]
-  badges            Badge[]
-
+  owner              Participant?    @relation("GroupOwner", fields: [ownerParticipantId], references: [id], onDelete: Restrict)
+  participants       Participant[]
+  records            Record[]
+  badges             Badge[]
+  tags               Tag[]
+  
   @@index([name])
 }
 
 model Participant {
-  id         Int       @id @default(autoincrement())
+  id         Int        @id @default(autoincrement())
   groupId    Int
   nickname   String
   password   String
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
 
-  group      Group     @relation(fields: [groupId], references: [id])
+  group      Group      @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  ownedGroup Group[]    @relation("GroupOwner")
   records    Record[]
 
   @@unique([groupId, nickname], name: "groupId_nickname")
+  @@index([groupId])
 }
 
 model Record {
@@ -78,10 +82,14 @@ model Record {
   @@index([participantId])
 }
 
+model Tag {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique
+  groups Group[]
+}
+
 model Badge {
   id    Int       @id @default(autoincrement())
   name  BadgeType @unique
-  label String
-  
   groups Group[]
 }
