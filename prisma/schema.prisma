@@ -63,6 +63,6 @@ model Tag {
 
 model Badge {
   id     Int     @id @default(autoincrement())
-  name   String  @unique
+  type   BadgeType @unique // enum 값과 연결
   groups Group[]
 }
