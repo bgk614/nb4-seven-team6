@@ -1,0 +1,101 @@
+import { PrismaClient } from '../../generated/prisma';
+
+const prisma = new PrismaClient();
+
+// 그룹 목록 조회
+export async function fetchGroups({
+  page = 1,
+  limit = 10,
+  order = 'desc',
+  orderBy = 'createdAt',
+  search = '',
+}) {
+  try {
+    const where = search
+      ? {
+          name: { contains: search, mode: 'insensitive' as const },
+        }
+      : {};
+    const groups = await prisma.group.findMany({
+      skip: (page - 1) * limit,
+      take: limit,
+      orderBy: {
+        [orderBy]: order,
+      },
+      where,
+      include: {
+        tags: {
+          select: { name: true },
+        },
+        owner: {
+          select: {
+            id: true,
+            nickname: true,
+            createdAt: true,
+            updatedAt: true,
+          },
+        },
+        participants: {
+          select: {
+            id: true,
+            nickname: true,
+            createdAt: true,
+            updatedAt: true,
+          },
+        },
+        badges: {
+          select: {
+            type: true,
+          },
+        },
+      },
+    });
+    if (groups.length === 0) {
+      throw new Error('그룹이 존재하지 않습니다.');
+    }
+    const total = await prisma.group.count({ where });
+    return { data: groups, total };
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+}
+
+// 그룹 상세 조회
+export async function fetchGroupById(groupId) {
+  try {
+    const group = await prisma.group.findUnique({
+      where: { id: groupId },
+      include: {
+        tags: {
+          select: { name: true },
+        },
+        owner: {
+          select: {
+            id: true,
+            nickname: true,
+            createdAt: true,
+            updatedAt: true,
+          },
+        },
+        participants: {
+          select: {
+            id: true,
+            nickname: true,
+            createdAt: true,
+            updatedAt: true,
+          },
+        },
+        badges: {
+          select: {
+            type: true,
+          },
+        },
+      },
+    });
+    return group;
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+}
