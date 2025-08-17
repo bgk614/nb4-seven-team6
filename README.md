@@ -3,6 +3,7 @@
 ## [:link: 노션](https://www.notion.so/24cb1b4efe4d80dc818cf37149e2f65b)
 
 ## 팀원 구성
+
 이상욱 [Github :link:](https://github.com/NewL1f3)<br>
 김보경 [Github :link:](https://github.com/bgk614)<br>
 엄규리 [Github :link:](https://github.com/ammgree)<br>
@@ -14,8 +15,8 @@
 운동 인증 커뮤니티 서비스의 백엔드 시스템 구축<br>
 프로젝트 기간: 2025.08.11 ~ 2025.08.29<br>
 
-
 ## 기술 스택
+
 <table>
   <tr>
     <th>Category</th>
@@ -54,6 +55,7 @@
 <summary> :hammer: 더보기</summary>
 
 ### 사용 툴
+
 <table>
   <tr>
     <th>Category</th>
@@ -113,6 +115,7 @@
 </table>
 
 ### 기타
+
 <table>
   <tr>
     <th>Tool</th>
@@ -135,22 +138,28 @@
 
 ## 팀원별 구현 기능 상세
 
-### 이상욱  <sub>운동기록(조회/정렬/검색)</sub>
+### 이상욱 <sub>운동기록(조회/정렬/검색)</sub>
+
 (자신이 개발한 기능에 대한 사진이나 gif 파일 첨부)
 
-### 김보경  <sub>그룹 DB, 그룹(생성/수정/삭제)</sub>
+### 김보경 <sub>그룹 DB, 그룹(생성/수정/삭제)</sub>
+
 (자신이 개발한 기능에 대한 사진이나 gif 파일 첨부)
 
-### 엄규리  <sub>그룹(조회/정렬/검색)</sub>
+### 엄규리 <sub>그룹(조회/정렬/검색)</sub>
+
 (자신이 개발한 기능에 대한 사진이나 gif 파일 첨부)
 
-### 박형익  <sub>그룹(배지/참여/추천)</sub>
+### 박형익 <sub>그룹(배지/참여/추천)</sub>
+
 (자신이 개발한 기능에 대한 사진이나 gif 파일 첨부)
 
-### 김태회  <sub>기록 DB, 운동기록(생성/수정/삭제)</sub>
+### 김태회 <sub>기록 DB, 운동기록(생성/수정/삭제)</sub>
+
 (자신이 개발한 기능에 대한 사진이나 gif 파일 첨부)
 
 ## 파일 구조
+
 <details>
 <summary>📂 파일 구조 보기</summary>
 
@@ -213,6 +222,7 @@ package.json
 tsconfig.json
 README.md
 ```
+
 </details>
 
 ## 구현 홈페이지
