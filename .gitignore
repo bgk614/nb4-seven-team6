@@ -1,10 +1,10 @@
 node_modules/
 .vscode/
-/src/generated/prisma
-.env
 test
+/src/generated
 .env.claude/
 .env
 uploads/
 .DS_Store
 package-lock.json
+dist/
