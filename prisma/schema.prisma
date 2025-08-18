@@ -20,39 +20,66 @@ enum BadgeType {
   RECORD_100
 }
 
+enum RecordType {
+  RUN
+  BIKE
+  SWIM
+}
+
 model Group {
-  id                 Int      @id @default(autoincrement())
+  id                 Int             @id @default(autoincrement())
+  ownerParticipantId Int?
   name               String
   description        String
   photoUrl           String?
-  goalRep            Int      @default(0)
+  goalRep            Int
   discordWebhookUrl  String
   discordInviteUrl   String
-  likeCount          Int      @default(0)
-  ownerParticipantId Int // 오너는 Participant 중 한 명
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  likeCount          Int             @default(0)
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
 
-  owner        Participant   @relation("GroupOwner", fields: [ownerParticipantId], references: [id], onDelete: Restrict)
-  participants Participant[]
-  tags         Tag[]
-  badges       Badge[]
-  // records     Records[]  // 그룹 전체 운동 기록 Badge수여할때 필요한 정보, record 모델이 없어서 에러 발생 => 모델 생성 전까지 주석 처리
+  owner              Participant?    @relation("GroupOwner", fields: [ownerParticipantId], references: [id], onDelete: Restrict)
+  participants       Participant[]
+  records            Record[]
+  badges             Badge[]
+  tags               Tag[]
+  
+  @@index([name])
 }
 
 model Participant {
-  id        Int      @id @default(autoincrement())
-  groupId   Int
-  nickname  String
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         Int        @id @default(autoincrement())
+  groupId    Int
+  nickname   String
+  password   String
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
 
-  group      Group   @relation(fields: [groupId], references: [id], onDelete: Cascade)
-  ownedGroup Group[] @relation("GroupOwner")
+  group      Group      @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  ownedGroup Group[]    @relation("GroupOwner")
+  records    Record[]
 
-  @@unique([groupId, nickname]) // 그룹 내 닉네임 중복 방지
+  @@unique([groupId, nickname], name: "groupId_nickname")
   @@index([groupId])
+}
+
+model Record {
+  id            Int        @id @default(autoincrement())
+  groupId       Int
+  participantId Int
+  type          RecordType
+  description   String?
+  timeSec       Int
+  distanceM     Int?
+  photos        String[]
+  createdAt     DateTime   @default(now())
+
+  group         Group      @relation(fields: [groupId], references: [id])
+  participant   Participant @relation(fields: [participantId], references: [id])
+
+  @@index([groupId])
+  @@index([participantId])
 }
 
 model Tag {
@@ -62,7 +89,7 @@ model Tag {
 }
 
 model Badge {
-  id     Int     @id @default(autoincrement())
-  type   BadgeType @unique // enum 값과 연결
+  id    Int       @id @default(autoincrement())
+  name  BadgeType @unique
   groups Group[]
 }
