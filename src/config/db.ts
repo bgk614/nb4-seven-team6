@@ -1,4 +1,9 @@
-// Prisma 데이터베이스 클라이언트 설정
-import { PrismaClient } from '../generated/prisma/index.js';
+// db.ts
 
+import { PrismaClient } from '../generated/prisma';
 export const prisma = new PrismaClient();
+
+// 종료 시 연결 정리
+process.on('beforeExit', async () => {
+  await prisma.$disconnect();
+});

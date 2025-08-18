@@ -1,8 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// prisma/schema.prisma
 
 generator client {
   provider = "prisma-client-js"
@@ -20,14 +16,19 @@ enum BadgeType {
   RECORD_100
 }
 
-enum RecordType {
-  RUN
-  BIKE
-  SWIM
+/**
+ * 프론트 enum: run, bike, swim
+ */
+enum ExerciseType {
+  run
+  bike
+  swim
+
+  @@map("ExerciseType")
 }
 
 model Group {
-  id                 Int             @id @default(autoincrement())
+  id                 Int           @id @default(autoincrement())
   ownerParticipantId Int?
   name               String
   description        String
@@ -35,16 +36,16 @@ model Group {
   goalRep            Int
   discordWebhookUrl  String
   discordInviteUrl   String
-  likeCount          Int             @default(0)
-  createdAt          DateTime        @default(now())
-  updatedAt          DateTime        @updatedAt
+  likeCount          Int           @default(0)
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
 
-  owner              Participant?    @relation("GroupOwner", fields: [ownerParticipantId], references: [id], onDelete: Restrict)
-  participants       Participant[]
-  records            Record[]
-  badges             Badge[]
-  tags               Tag[]
-  
+  owner        Participant?  @relation("GroupOwner", fields: [ownerParticipantId], references: [id], onDelete: Restrict)
+  participants Participant[]
+  records      Record[]
+  badges       Badge[]
+  tags         Tag[]
+
   @@index([name])
 }
 
@@ -64,24 +65,6 @@ model Participant {
   @@index([groupId])
 }
 
-model Record {
-  id            Int        @id @default(autoincrement())
-  groupId       Int
-  participantId Int
-  type          RecordType
-  description   String?
-  timeSec       Int
-  distanceM     Int?
-  photos        String[]
-  createdAt     DateTime   @default(now())
-
-  group         Group      @relation(fields: [groupId], references: [id], onDelete: Cascade)
-  participant   Participant @relation(fields: [participantId], references: [id], onDelete: Cascade)
-
-  @@index([groupId])
-  @@index([participantId])
-}
-
 model Tag {
   id     Int     @id @default(autoincrement())
   name   String  @unique
@@ -89,7 +72,39 @@ model Tag {
 }
 
 model Badge {
-  id    Int       @id @default(autoincrement())
-  name  BadgeType @unique
+  id     Int       @id @default(autoincrement())
+  type   BadgeType @unique
   groups Group[]
+}
+
+model Record {
+  id            Int           @id @default(autoincrement())
+  groupId       Int
+  participantId Int
+  exercise      ExerciseType
+  description   String?
+  seconds       Int           // 실제 운동한 시간(초)
+  distanceKm    Float?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  group         Group         @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  participant   Participant   @relation(fields: [participantId], references: [id], onDelete: Cascade)
+  photos        RecordPhoto[]
+
+  @@index([groupId])
+  @@index([participantId])
+  @@index([exercise])
+  @@map("records")
+}
+
+model RecordPhoto {
+  id       Int    @id @default(autoincrement())
+  recordId Int
+  url      String
+
+  record   Record @relation(fields: [recordId], references: [id], onDelete: Cascade)
+
+  @@index([recordId])
+  @@map("record_photos")
 }
