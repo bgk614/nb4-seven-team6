@@ -4,12 +4,7 @@ test
 /src/generated
 .env.claude/
 .env
-uploads/
 .DS_Store
-<<<<<<< HEAD
 package-lock.json
 dist/
-=======
-dist/
 uploads/
->>>>>>> 2a67e22 (chore: update setup)
