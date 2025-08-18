@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { UpdateGroupRequest, GroupResponse } from '../../models/group';
-import { verifyOwner } from '../../utils/auth.util'; // ✅ 공통 함수 사용
+import { verifyOwner } from '../../utils/auth.util';
 import { toGroupResponse } from '../../utils/mappers/group.mapper';
 
 const prisma = new PrismaClient();
@@ -22,7 +22,6 @@ export const updateGroupService = async (
   );
   if (!owner) throw new Error('오너 없음');
 
-  // ✅ 닉네임 + 패스워드 공통 검증
   const isOwner = await verifyOwner(nickname, password, owner);
   if (!isOwner) throw new Error('권한 없음');
 
@@ -32,7 +31,7 @@ export const updateGroupService = async (
       ...updateData,
       tags: tags
         ? {
-            set: [], // 기존 태그 초기화
+            set: [],
             connectOrCreate: tags.map((t) => ({
               where: { name: t },
               create: { name: t },
