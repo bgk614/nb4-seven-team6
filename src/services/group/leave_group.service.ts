@@ -5,10 +5,10 @@ import bcrypt from 'bcryptjs';
 // 그룹에서 참가자 제거 (비밀번호 검증 후 관련 기록도 함께 삭제)
 export async function leaveGroup(
   groupId: number,
-  payload: { nickname: string; password: string }
+  payload: { nickname: string; password: string },
 ): Promise<boolean> {
   const { nickname, password } = payload;
-  
+
   // 필수 필드 검증
   if (!nickname || !password) {
     const error = new Error('nickname/password 필수') as any;
@@ -20,7 +20,7 @@ export async function leaveGroup(
   return await prisma.$transaction(async (tx) => {
     // 참가자 존재 확인
     const participant = await tx.participant.findUnique({
-      where: { groupId_nickname: { groupId, nickname } }
+      where: { groupId_nickname: { groupId, nickname } },
     });
 
     if (!participant) {
@@ -30,18 +30,19 @@ export async function leaveGroup(
     }
 
     // 비밀번호 검증
-    const isValidPassword = await bcrypt.compare(password, participant.password);
+    const isValidPassword = await bcrypt.compare(
+      password,
+      participant.password,
+    );
     if (!isValidPassword) {
       const error = new Error('비밀번호 불일치') as any;
       error.status = 401;
       throw error;
     }
 
-    
-
     // 참가자 삭제
     await tx.participant.delete({
-      where: { id: participant.id }
+      where: { id: participant.id },
     });
 
     return true;
