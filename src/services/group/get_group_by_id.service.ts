@@ -2,27 +2,11 @@ import { PrismaClient } from '../../generated/prisma';
 
 const prisma = new PrismaClient();
 
-// 그룹 목록 조회
-export async function getGroupsService({
-  page = 1,
-  limit = 10,
-  order = 'desc',
-  orderBy = 'createdAt',
-  search = '',
-}) {
+// 그룹 상세 조회
+export async function getGroupByIdService(groupId: number) {
   try {
-    const where = search
-      ? {
-          name: { contains: search, mode: 'insensitive' as const },
-        }
-      : {};
-    const groups = await prisma.group.findMany({
-      skip: (page - 1) * limit,
-      take: limit,
-      orderBy: {
-        [orderBy]: order,
-      },
-      where,
+    const group = await prisma.group.findUnique({
+      where: { id: groupId },
       include: {
         tags: {
           select: { name: true },
@@ -50,9 +34,7 @@ export async function getGroupsService({
         },
       },
     });
-
-    const total = await prisma.group.count({ where });
-    return { data: groups, total };
+    return group;
   } catch (e) {
     console.log(e);
     throw e;
