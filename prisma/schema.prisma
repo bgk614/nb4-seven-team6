@@ -75,8 +75,8 @@ model Record {
   photos        String[]
   createdAt     DateTime   @default(now())
 
-  group         Group      @relation(fields: [groupId], references: [id])
-  participant   Participant @relation(fields: [participantId], references: [id])
+  group         Group      @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  participant   Participant @relation(fields: [participantId], references: [id], onDelete: Cascade)
 
   @@index([groupId])
   @@index([participantId])

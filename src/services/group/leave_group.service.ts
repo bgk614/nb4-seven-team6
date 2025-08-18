@@ -37,10 +37,7 @@ export async function leaveGroup(
       throw error;
     }
 
-    // 참가자의 모든 기록 먼저 삭제 (관련 데이터 정리)
-    await tx.record.deleteMany({
-      where: { participantId: participant.id }
-    });
+    
 
     // 참가자 삭제
     await tx.participant.delete({
