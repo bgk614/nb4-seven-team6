@@ -1,0 +1,11 @@
+/groups:
+  post:
+    $ref: './group/create_group.yaml'
+/groups/{groupId}:
+  patch:
+    $ref: './group/update_group.yaml'
+  delete:
+    $ref: './group/delete_group.yaml'
+/uploads:
+  post:
+    $ref: './upload/index.yaml'

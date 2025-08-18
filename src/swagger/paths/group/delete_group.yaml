@@ -1,0 +1,21 @@
+tags:
+  - 그룹
+summary: '그룹 삭제'
+parameters:
+  - $ref: '../../components/index.yaml#/parameters/GroupId'
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../../components/index.yaml#/schemas/Auth'
+        required:
+          - nickname
+          - password
+        example:
+          $ref: '../../components/index.yaml#/examples/AuthExample'
+responses:
+  '200':
+    description: '삭제 성공'
+  default:
+    $ref: ../../components/responses/DefaultError.yaml

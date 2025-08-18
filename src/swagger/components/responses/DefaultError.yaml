@@ -1,0 +1,31 @@
+description: "공통 에러 응답"
+content:
+  application/json:
+    schema:
+      $ref: '../schemas/ErrorResponse.yaml'
+    examples:
+      BadRequest:
+        summary: 400 잘못된 요청
+        value:
+          status: 400
+          message: "잘못된 요청"
+      Unauthorized:
+        summary: 401 인증 실패
+        value:
+          status: 401
+          message: "인증 필요"
+      Forbidden:
+        summary: 403 권한 없음
+        value:
+          status: 403
+          message: "권한 없음"
+      NotFound:
+        summary: 404 자원 없음
+        value:
+          status: 404
+          message: "자원 없음"
+      InternalServerError:
+        summary: 500 서버 에러
+        value:
+          status: 500
+          message: "서버 오류"
