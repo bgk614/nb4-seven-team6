@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import * as groupService from '../../services/group/get_group.service';
 
 // 그룹 목록 조회
-export async function getGroups(req: Request, res: Response) {
+export async function getGroupsController(req: Request, res: Response) {
   try {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
