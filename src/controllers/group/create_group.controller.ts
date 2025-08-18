@@ -1,35 +1,17 @@
-import { Request, Response } from 'express';
-import { createGroupService } from '../../services/group/create_group.service.js';
+import { Request, Response, NextFunction } from "express";
+import { createGroupService } from "../../services/group/index.ts";
+import { CreateGroupRequest } from "../../models/group/index.ts";
+import { GroupResponse } from '../../models/group/index.ts';
 
-export const createGroupController = async (req: Request, res: Response) => {
+export const createGroupController = async (
+  req: Request<{}, {}, CreateGroupRequest>,
+  res: Response<GroupResponse>,
+  next: NextFunction,
+) => {
   try {
-    const {
-      name,
-      description,
-      photoUrl,
-      goalReq,
-      discordWebhookUrl,
-      discordInviteUrl,
-      tags,
-      ownerNickname,
-      ownerPassword,
-    } = req.body;
-
-    const group = await createGroupService({
-      name,
-      description,
-      photoUrl,
-      goalReq,
-      discordWebhookUrl,
-      discordInviteUrl,
-      tags,
-      ownerNickname,
-      ownerPassword,
-    });
-
+    const group = await createGroupService(req.body);
     res.status(201).json(group);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: '그룹 생성 실패' });
+    next(error); 
   }
 };

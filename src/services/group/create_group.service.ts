@@ -1,20 +1,12 @@
-// src/services/group/create_group.service.ts
 import { PrismaClient } from '@prisma/client';
+import { CreateGroupRequest, GroupResponse } from '../../models/group';
+import { hashPassword } from '../../utils/auth.util';
+
 const prisma = new PrismaClient();
 
-interface CreateGroupParams {
-  name: string;
-  description: string;
-  photoUrl?: string;
-  goalRep: number; 
-  discordWebhookUrl: string;
-  discordInviteUrl: string;
-  tags?: string[];
-  ownerNickname: string;
-  ownerPassword: string;
-}
-
-export const createGroupService = async (params: CreateGroupParams) => {
+export const createGroupService = async (
+  params: CreateGroupRequest,
+): Promise<GroupResponse> => {
   const {
     name,
     description,
@@ -22,35 +14,46 @@ export const createGroupService = async (params: CreateGroupParams) => {
     goalRep,
     discordWebhookUrl,
     discordInviteUrl,
-    ownerNickname,
-    ownerPassword,
+    nickname,
+    password,
+    tags,
   } = params;
+
+  const hashedPassword = await hashPassword(password);
 
   return prisma.$transaction(async (tx) => {
     const group = await tx.group.create({
       data: {
         name,
-        description,
-        photoUrl,
+        description: description ?? '',
+        photoUrl: photoUrl ?? null,
         goalRep,
         discordWebhookUrl,
         discordInviteUrl,
+        participants: {
+          create: {
+            nickname: nickname,
+            password: hashedPassword,
+          },
+        },
+        tags: tags
+          ? {
+              connectOrCreate: tags.map((t) => ({
+                where: { name: t },
+                create: { name: t },
+              })),
+            }
+          : undefined,
       },
-    });
-
-    const owner = await tx.participant.create({
-      data: {
-        groupId: group.id,
-        nickname: ownerNickname,
-        password: ownerPassword, 
-      },
+      include: { participants: true, tags: true },
     });
 
     const updatedGroup = await tx.group.update({
       where: { id: group.id },
-      data: { ownerParticipantId: owner.id },
+      data: { ownerParticipantId: group.participants[0].id },
+      include: { participants: true, tags: true },
     });
-    
-    return updatedGroup;
+
+    return updatedGroup as unknown as GroupResponse;
   });
 };
