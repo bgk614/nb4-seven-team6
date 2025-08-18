@@ -1,4 +1,4 @@
 export interface UploadRequest {
-  targetId: number;       
+  targetId: number;
   file: Express.Multer.File;
 }

@@ -13,7 +13,7 @@ export const updateGroupController = async (
       return res.status(400).json({ message: '잘못된 그룹 ID' });
     }
 
-    const data: UpdateGroupRequest = req.body; 
+    const data: UpdateGroupRequest = req.body;
     const group = await updateGroupService(groupId, data);
 
     return res.status(200).json(group);

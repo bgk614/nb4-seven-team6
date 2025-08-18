@@ -5,11 +5,11 @@ import { evaluateAndAwardBadges } from './badge_evaluation.service.js';
 
 // 그룹에 새 참가자 추가 (닉네임 중복 방지, 비밀번호 해싱)
 export async function joinGroup(
-  groupId: number, 
-  payload: { nickname: string; password: string }
+  groupId: number,
+  payload: { nickname: string; password: string },
 ): Promise<{ id: number; groupId: number; nickname: string; createdAt: Date }> {
   const { nickname, password } = payload;
-  
+
   // 필수 필드 검증
   if (!nickname || !password) {
     const error = new Error('nickname/password 필수') as any;
@@ -27,9 +27,9 @@ export async function joinGroup(
         data: {
           groupId,
           nickname,
-          password: hashedPassword
+          password: hashedPassword,
         },
-        select: { id: true, groupId: true, nickname: true, createdAt: true }
+        select: { id: true, groupId: true, nickname: true, createdAt: true },
       });
 
       // 참여자 10명 달성 시 배지 부여 확인

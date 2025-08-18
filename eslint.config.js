@@ -1,24 +1,27 @@
 import js from '@eslint/js';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
-import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
 import eslintPluginPrettier from 'eslint-plugin-prettier';
-import { defineConfig } from 'eslint/config';
 
 export default [
   {
-    files: [],
+    files: ['**/*.{js,mjs,cjs,ts,mts,cts}'], 
+    ignores: ['node_modules', 'dist'], 
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: globals.browser, 
+    },
     plugins: {
-      '@typescript-eslint': typescriptEslint,
+      '@typescript-eslint': tseslint,
+      prettier: eslintPluginPrettier,
     },
     rules: {
-      files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
-      plugins: { js },
-      extends: ['js/recommended'],
-      languageOptions: { globals: globals.browser },
+      ...js.configs.recommended.rules, 
+      'prettier/prettier': 'error', 
       '@typescript-eslint/indent': ['error', 2],
     },
   },
-  eslintConfigPrettier,
+  eslintConfigPrettier, 
 ];

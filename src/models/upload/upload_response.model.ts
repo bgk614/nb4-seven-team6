@@ -1,3 +1,3 @@
 export interface UploadResponse {
-  url: string;            
+  url: string;
 }

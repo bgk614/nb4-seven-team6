@@ -1,5 +1,5 @@
 export interface AuthRequest {
-  targetId: number;    
-  nickname: string; 
+  targetId: number;
+  nickname: string;
   password: string;
 }
