@@ -50,9 +50,7 @@ export async function fetchGroups({
         },
       },
     });
-    if (groups.length === 0) {
-      throw new Error('그룹이 존재하지 않습니다.');
-    }
+
     const total = await prisma.group.count({ where });
     return { data: groups, total };
   } catch (e) {
@@ -62,7 +60,7 @@ export async function fetchGroups({
 }
 
 // 그룹 상세 조회
-export async function fetchGroupById(groupId) {
+export async function fetchGroupById(groupId: number) {
   try {
     const group = await prisma.group.findUnique({
       where: { id: groupId },
