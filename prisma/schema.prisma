@@ -21,9 +21,7 @@ enum BadgeType {
 }
 
 /**
- * 프론트 enum:
- * export enum ExerciseType { RUN = 'run', BIKE = 'bike', SWIM = 'swim' }
- * -> DB 값은 'run' | 'bike' | 'swim'으로 저장되도록 매핑
+ * 프론트 enum: run, bike, swim
  */
 enum ExerciseType {
   run
