@@ -8,6 +8,9 @@ import { leaveGroup } from '../controllers/group/leave_group.controller.js';
 import { createGroupController } from '../controllers/group/create_group.controller.ts';
 import { createGroupService } from '../services/group/create_group.service.ts';
 import { validateGroupQuery, validateID } from '../middleware/group.middleware';
+import * as Params from '../models/group/index';
+import * as Controller from '../controllers/group/index';
+import { validate } from '../middleware/index';
 
 export const groupRouter = express.Router();
 
@@ -15,11 +18,15 @@ export const groupRouter = express.Router();
 groupRouter
   .route('/')
   .get(validateGroupQuery, getGroupsController) // 목록 조회
-  .post(createGroupController);
-
+  .post(validate(Params.CreateGroupSchema), Controller.createGroupController);
+  
 groupRouter.get('/:id', validateID, getGroupByIdController); // 상세 조회
 
-// 그룹 추천/참여/탈퇴
+groupRouter
+  .route('/:groupId')
+  .patch(validate(Params.UpdateGroupSchema), Controller.updateGroupController)
+  .delete(Controller.deleteGroupController);
+
 groupRouter.post('/:groupId/recommend', recommendGroup);
 groupRouter.post('/:groupId/join', joinGroup);
 groupRouter.post('/:groupId/leave', leaveGroup);
