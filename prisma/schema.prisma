@@ -20,15 +20,15 @@ enum BadgeType {
   RECORD_100
 }
 
-/*
-  프론트 enum:
-  export enum ExerciseType { RUN = 'run', BIKE = 'bike', SWIM = 'swim' }
-  -> DB 값은 'run' | 'bike' | 'swim'으로 저장되도록 매핑
-*/
+/**
+ * 프론트 enum:
+ * export enum ExerciseType { RUN = 'run', BIKE = 'bike', SWIM = 'swim' }
+ * -> DB 값은 'run' | 'bike' | 'swim'으로 저장되도록 매핑
+ */
 enum ExerciseType {
-  RUN  @map("run")
-  BIKE @map("bike")
-  SWIM @map("swim")
+  run
+  bike
+  swim
 
   @@map("ExerciseType")
 }
@@ -42,15 +42,15 @@ model Group {
   discordWebhookUrl  String
   discordInviteUrl   String
   likeCount          Int      @default(0)
-  ownerParticipantId Int // 오너는 Participant 중 한 명
+  ownerParticipantId Int? // 오너는 Participant 중 한 명
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
 
-  owner        Participant   @relation("GroupOwner", fields: [ownerParticipantId], references: [id], onDelete: Restrict)
+  owner        Participant?   @relation("GroupOwner", fields: [ownerParticipantId], references: [id], onDelete: Restrict)
   participants Participant[]
   tags         Tag[]
   badges       Badge[]
-  records      Records[]  
+  records      Record[]
 }
 
 model Participant {
@@ -64,6 +64,8 @@ model Participant {
   group      Group   @relation(fields: [groupId], references: [id], onDelete: Cascade)
   ownedGroup Group[] @relation("GroupOwner")
 
+  records Record[]
+
   @@unique([groupId, nickname]) // 그룹 내 닉네임 중복 방지
   @@index([groupId])
 }
@@ -75,24 +77,24 @@ model Tag {
 }
 
 model Badge {
-  id     Int     @id @default(autoincrement())
+  id     Int       @id @default(autoincrement())
   type   BadgeType @unique // enum 값과 연결
   groups Group[]
 }
 
 model Record {
-  id            Int           @id @default(autoincrement())
+  id            Int          @id @default(autoincrement())
   groupId       Int
   participantId Int
   exercise      ExerciseType
   description   String?
-  seconds       Int           // 실제 운동한 시간(초)
+  seconds       Int // 실제 운동한 시간(초)
   distanceKm    Float?
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
 
-  group       Group        @relation(fields: [groupId], references: [id], onDelete: Cascade)
-  participant Participant  @relation(fields: [participantId], references: [id], onDelete: Cascade)
+  group       Group         @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  participant Participant   @relation(fields: [participantId], references: [id], onDelete: Cascade)
   photos      RecordPhoto[]
 
   @@index([groupId])
@@ -106,7 +108,7 @@ model RecordPhoto {
   recordId Int
   url      String
 
-  record   Record @relation(fields: [recordId], references: [id], onDelete: Cascade)
+  record Record @relation(fields: [recordId], references: [id], onDelete: Cascade)
 
   @@index([recordId])
   @@map("record_photos")

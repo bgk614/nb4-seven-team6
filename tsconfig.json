@@ -1,0 +1,21 @@
+// tsconfig.json
+
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "lib": ["ES2022"],
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "rootDir": "src",
+    "outDir": "dist",
+    "types": ["node", "vitest"] // vitest 안 쓰면 ["node"]만 두세요
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/tests/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}

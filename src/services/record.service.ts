@@ -1,19 +1,8 @@
-// src/services/record.service.ts
-
 import { prisma } from '../config/db';
 import { readStopped, consume } from '../utils/timer';
 import { sendDiscordWebhook } from '../utils/discord';
 
-export function validateExercise(v: string) {
-  const allowed = ['run', 'bike', 'swim'];
-  if (!allowed.includes(v)) {
-    const err = new Error('Invalid exercise type');
-    (err as any).status = 400;
-    throw err;
-  }
-  return v as 'run' | 'bike' | 'swim';
-}
-
+// 사진 URL 검증 (최대 3장)
 export function validatePhotos(photos: unknown) {
   if (photos == null) return [] as string[];
   if (!Array.isArray(photos)) {
@@ -36,6 +25,7 @@ export function validatePhotos(photos: unknown) {
   return photos as string[];
 }
 
+// 서버 타이머 강제 적용
 export function enforceTimer({
   timerId,
   groupId,
@@ -63,7 +53,7 @@ export function enforceTimer({
     (err as any).status = 400;
     throw err;
   }
-  consume(timerId);
+  consume(timerId); // 1회성
   return t.elapsedSec!;
 }
 
@@ -80,7 +70,7 @@ export async function createRecord(opts: {
     data: {
       groupId: opts.groupId,
       participantId: opts.participantId,
-      exercise: opts.exercise as any, // Prisma enum(키) RUN/BIKE/SWIM에 @map돼서 DB에는 'run'/'bike'/'swim'
+      exercise: opts.exercise as any, // enum 키가 이제 run|bike|swim
       description: opts.description ?? null,
       seconds: opts.seconds,
       distanceKm: opts.distanceKm ?? null,
@@ -94,16 +84,15 @@ export async function createRecord(opts: {
     },
   });
 
-  // 디스코드 알림
   const group = await prisma.group.findUnique({ where: { id: opts.groupId } });
   if (group?.discordWebhookUrl) {
     const lines = [
       `**새 운동 기록 등록!**`,
       `그룹: ${group.name} (#${group.id})`,
       `닉네임: ${record.participant.nickname}`,
-      `종목: ${opts.exercise}`,
+      `종목: ${record.exercise}`,
       `시간: ${Math.floor(record.seconds / 60)}분 ${record.seconds % 60}초`,
-      ...(record.distanceKm
+      ...(record.distanceKm != null
         ? [`거리: ${record.distanceKm.toFixed(2)} km`]
         : []),
       ...(record.description ? [`설명: ${record.description}`] : []),
