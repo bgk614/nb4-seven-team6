@@ -43,100 +43,69 @@
   <tr>
     <td>ORM</td>
     <td>Prisma ORM</td>
-    <td align="right">6.13.0</td>
+    <td align="right">6.14.0</td>
   </tr>
   <tr>
     <td>Database</td>
     <td>PostgreSQL</td>
     <td align="right">17.5</td>
   </tr>
-</table>
-<detail>
-
-<details>
-<summary> :hammer: 더보기</summary>
-
-### 사용 툴
-
-<table>
   <tr>
-    <th>Category</th>
-    <th>Tool</th>
-    <th align="right">Version</th>
+    <td>Auth</td>
+    <td>Bcrypt</td>
+    <td align="right">6.0.0</td>
+  </tr>
+  <tr>
+    <td>Validation</td>
+    <td>Zod</td>
+    <td align="right">4.0.17</td>
+  </tr>
+  <tr>
+    <td>File Upload</td>
+    <td>Multer</td>
+    <td align="right">2.0.2</td>
+  </tr>
+  <tr>
+    <td>Logger</td>
+    <td>Morgan</td>
+    <td align="right">1.10.1</td>
+  </tr>
+  <tr>
+    <td>Middleware</td>
+    <td>CORS</td>
+    <td align="right">2.8.5</td>
   </tr>
   <tr>
     <td>Config</td>
-    <td>dotenv</td>
+    <td>Dotenv</td>
     <td align="right">17.2.1</td>
   </tr>
   <tr>
     <td>API Docs</td>
-    <td>swagger-ui-express</td>
+    <td>Swagger UI Express</td>
     <td align="right">5.0.1</td>
   </tr>
   <tr>
-    <td rowspan="3">Lint</td>
-    <td>eslint</td>
-    <td align="right">9.33.0</td>
+    <td>Test</td>
+    <td>Vitest / Supertest</td>
+    <td align="right">3.2.4 / 7.1.4</td>
   </tr>
   <tr>
-    <td>@typescript-eslint/eslint-plugin</td>
-    <td align="right">8.39.1</td>
+    <td>Lint / Format</td>
+    <td>ESLint / Prettier</td>
+    <td align="right">9.33.0 / 3.6.2</td>
   </tr>
   <tr>
-    <td>@typescript-eslint/parser</td>
-    <td align="right">8.39.1</td>
+    <td>Git Hook</td>
+    <td>Husky</td>
+    <td align="right">9.1.7</td>
   </tr>
   <tr>
-    <td rowspan="2">Formatter</td>
-    <td>Prettier</td>
-    <td align="right">3.6.2</td>
-  </tr>
-  <tr>
-    <td>eslint-plugin-prettier</td>
-    <td align="right">5.5.4</td>
-  </tr>
-  <tr>
-    <td rowspan="2">Dev Tools</td>
-    <td>nodemon</td>
-    <td align="right">3.1.10</td>
-  </tr>
-  <tr>
-    <td>tsx</td>
-    <td align="right">4.20.4</td>
-  </tr>
-  <tr>
-    <td rowspan="2">Types</td>
-    <td>@types/express</td>
-    <td align="right">5.0.3</td>
-  </tr>
-  <tr>
-    <td>@types/node</td>
-    <td align="right">24.2.1</td>
+    <td>Package Manager</td>
+    <td>npm</td>
+    <td align="right">10.x</td>
   </tr>
 </table>
-
-### 기타
-
-<table>
-  <tr>
-    <th>Tool</th>
-    <th>Version</th>
-  </tr>
-  <tr>
-    <td>Git &amp; GitHub</td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <td>Discord</td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <td>Notion</td>
-    <td>-</td>
-  </tr>
-</table>
-</details>
 
 ## 팀원별 구현 기능 상세
 
@@ -166,63 +135,66 @@
 <summary>📂 파일 구조 보기</summary>
 
 ```
- src
- ┣ config
- ┃ ┗ db.ts
- ┣ controllers
- ┃ ┣ record
- ┃ ┃ ┗ create_record.controller.ts
- ┃ ┗ group
- ┃    ┣ create_group.controller.ts
- ┃    ┣ delete_group.controller.ts
- ┃    ┣ update_group.controller.ts
- ┃    ┣ list_groups.controller.ts
- ┃    ┣ get_group.controller.ts
- ┃    ┣ recommend_group.controller.ts
- ┃    ┣ join_group.controller.ts
- ┃    ┗ leave_group.controller.ts
- ┣ middleware
- ┃ ┣ group.middleware.ts
- ┃ ┣ record.middleware.ts
- ┃ ┣ auth.middleware.ts
- ┃ ┗ error.middleware.ts
- ┣ models
- ┃ ┣ record.model.ts
- ┃ ┗ group.model.ts
- ┣ routes
- ┃ ┣ record.routes.ts
- ┃ ┗ group.routes.ts
- ┣ services
- ┃ ┣ record
- ┃ ┃ ┗ create_record.service.ts
- ┃ ┗ group
- ┃    ┣ create_group.service.ts
- ┃    ┣ delete_group.service.ts
- ┃    ┣ update_group.service.ts
- ┃    ┣ list_groups.service.ts
- ┃    ┣ get_group.service.ts
- ┃    ┣ recommend_group.service.ts
- ┃    ┣ join_group.service.ts
- ┃    ┣ leave_group.service.ts
- ┃    ┗ badge_evaluation.service.ts
- ┣ utils
- ┃ ┣ jwt.ts
- ┃ ┣ constants.ts
- ┃ ┗ logger.ts
- ┣ app.ts
- ┗ server.ts
-prisma
- ┣ schema.prisma
- ┗ seed.ts
-.env
-.env.example
-.gitignore
-.prettierrc
-app.js
-eslint.config.ts
-package.json
-tsconfig.json
-README.md
+.
+├── src
+│   ├── app.ts
+│   ├── config
+│   │   └── db.ts
+│   ├── controllers
+│   │   ├── auth.controller.ts
+│   │   ├── group
+│   │   ├── record.controller.ts
+│   │   └── user.controller.ts
+│   ├── generated
+│   ├── index.ts
+│   ├── middleware
+│   │   ├── auth.middleware.ts
+│   │   ├── error.middleware.ts
+│   │   └── validate.middleware.ts
+│   ├── models
+│   │   ├── auth
+│   │   ├── course.model.ts
+│   │   ├── error_response.model.ts
+│   │   ├── group
+│   │   ├── upload
+│   │   └── user.model.ts
+│   ├── routes
+│   │   ├── auth.routes.ts
+│   │   ├── group.routes.ts
+│   │   ├── record.routes.ts
+│   │   ├── timer.routes.ts
+│   │   ├── upload.route.ts
+│   │   ├── uploads
+│   │   └── user.routes.ts
+│   ├── services
+│   │   ├── auth.service.ts
+│   │   ├── group
+│   │   ├── record.service.ts
+│   │   └── user.service.ts
+│   ├── swagger
+│   │   ├── components
+│   │   ├── info
+│   │   ├── paths
+│   │   ├── server
+│   │   ├── swagger.yaml
+│   │   └── tags
+│   ├── tests
+│   │   ├── record.e2e.test.ts
+│   │   └── record.more.e2e.test.ts
+│   └── utils
+│       ├── auth.util.ts
+│       ├── discord.ts
+│       ├── mappers
+│       ├── password.ts
+│       └── timer.ts
+├── eslint.config.js
+├── tsconfig.json
+├── vitest.config.ts
+├── package-lock.json
+├── package.json
+├── seed.js
+├── uploads
+└── README.md
 ```
 
 </details>
