@@ -34,6 +34,7 @@ export async function joinGroup(
 
       // 참여자 10명 달성 시 배지 부여 확인
       await evaluateAndAwardBadges(groupId, tx);
+
       return participant;
     } catch (err: any) {
       // 닉네임 중복 오류 처리

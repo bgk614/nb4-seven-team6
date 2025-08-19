@@ -35,6 +35,6 @@ export const deleteGroupController = async (
       return res.status(404).json({ message: '그룹을 찾을 수 없습니다.' });
     }
 
-    next(error);
+    return next(error);
   }
 };

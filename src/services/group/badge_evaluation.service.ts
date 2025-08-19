@@ -1,11 +1,11 @@
 // 배지 평가 및 부여 서비스
-import { prisma } from '../../config/db.js';
+import { Prisma } from '@prisma/client';
 import { BadgeType } from '../../generated/prisma/index.js';
 
 // 그룹의 현재 상태를 확인하여 조건 달성 시 배지 부여
 export async function evaluateAndAwardBadges(
   groupId: number,
-  tx = prisma,
+  tx: Prisma.TransactionClient,
 ): Promise<void> {
   // 그룹 현황을 1회 쿼리로 조회 (참여자수, 기록수, 추천수, 보유배지)
   const group = await tx.group.findUnique({
@@ -19,7 +19,7 @@ export async function evaluateAndAwardBadges(
         },
       },
       badges: {
-        select: { name: true },
+        select: { type: true },
       },
     },
   });
@@ -27,7 +27,7 @@ export async function evaluateAndAwardBadges(
   if (!group) return;
 
   // 이미 보유한 배지 목록
-  const existingBadges = new Set(group.badges.map((b) => b.name));
+  const existingBadges = new Set(group.badges.map((b) => b.type));
   const badgesToAward: BadgeType[] = [];
 
   // 참여자 10명 달성 배지 확인
@@ -53,7 +53,7 @@ export async function evaluateAndAwardBadges(
 
   // 새로 획득한 배지들을 그룹에 연결
   for (const badgeType of badgesToAward) {
-    const badge = await tx.badge.findUnique({ where: { name: badgeType } });
+    const badge = await tx.badge.findUnique({ where: { type: badgeType } });
     if (badge) {
       await tx.group.update({
         where: { id: groupId },
