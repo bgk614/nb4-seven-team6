@@ -29,7 +29,7 @@ export async function getGroupByIdService(groupId: number) {
         },
         badges: {
           select: {
-            type: true,
+            name: true,
           },
         },
       },

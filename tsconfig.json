@@ -14,7 +14,7 @@
     "forceConsistentCasingInFileNames": true,
     "rootDir": "src",
     "outDir": "dist",
-    "types": ["node", "vitest"] // vitest 안 쓰면 ["node"]만 두세요
+    "types": ["node"] // vitest 안 쓰면 ["node"]만 두세요
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/tests/**/*.ts"],
   "exclude": ["node_modules", "dist"]
