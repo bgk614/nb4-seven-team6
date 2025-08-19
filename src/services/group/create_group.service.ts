@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
-import { CreateGroupRequest, GroupResponse } from '../../models/group';
-import { hashPassword } from '../../utils/auth.util';
+import { CreateGroupRequest } from '@/models/group/create_group.dto';
+import { GroupResponse } from '@/models/group/group_response.dto';
+import { hashPassword } from '@/utils/auth.util';
 
 const prisma = new PrismaClient();
 

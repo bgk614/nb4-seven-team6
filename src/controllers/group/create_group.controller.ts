@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import { createGroupService } from '../../services/group/index.ts';
-import { CreateGroupRequest } from '../../models/group/index.ts';
-import { GroupResponse } from '../../models/group/index.ts';
+import { createGroupService } from '@/services/group/create_group.service';
+import { CreateGroupRequest } from '@/models/group/create_group.dto';
+import { GroupResponse } from '@/models/group/group_response.dto';
 
 export const createGroupController = async (
   req: Request<{}, {}, CreateGroupRequest>,
