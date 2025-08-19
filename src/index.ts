@@ -22,3 +22,5 @@ import app from './app';
     console.error('Swagger load error:', err);
   }
 })();
+
+export default app;

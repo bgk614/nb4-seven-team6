@@ -4,7 +4,7 @@ export const errorMiddleware = (
   err: any,
   req: Request,
   res: Response,
-  next: NextFunction,
+  _next: NextFunction,
 ) => {
   console.error(err);
 
@@ -12,6 +12,7 @@ export const errorMiddleware = (
   const message = err.message || 'Internal Server Error';
 
   res.status(status).json({
+    ok: false,
     status,
     message,
     errors: err.errors ?? null, // Zod 에러면 배열, 아니면 null
