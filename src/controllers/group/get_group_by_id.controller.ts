@@ -11,8 +11,8 @@ export async function getGroupByIdController(req: Request, res: Response) {
         message: 'Group not found',
       });
     }
-    res.json(group);
+    return res.json(group);
   } catch (e: any) {
-    res.status(500).json({ message: e.message });
+    return res.status(500).json({ message: e.message });
   }
 }

@@ -1,0 +1,12 @@
+description: 400 잘못된 요청
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 400
+        message:
+          type: string
+          example: 잘못된 요청입니다.

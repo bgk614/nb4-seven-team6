@@ -1,14 +1,16 @@
 # nb4-seven-team6
 
-## [🔗 노션](https://www.notion.so/24cb1b4efe4d80dc818cf37149e2f65b)
+## [:link: 노션](https://www.notion.so/24cb1b4efe4d80dc818cf37149e2f65b)
+
+## 로컬 [swagger](http://localhost:6123/api-docs/)
 
 ## 팀원 구성
 
-이상욱 (https://github.com/NewL1f3)<br>
-김보경 (https://github.com/bgk614)<br>
-엄규리 (https://github.com/ammgree)<br>
-박형익 (https://github.com/NewL1f3)<br>
-김태회 (https://github.com/F-los)<br>
+이상욱 [Github :link:](https://github.com/NewL1f3)<br>
+김보경 [Github :link:](https://github.com/bgk614)<br>
+엄규리 [Github :link:](https://github.com/ammgree)<br>
+박형익 [Github :link:](https://github.com/Sw-twt)<br>
+김태회 [Github :link:](https://github.com/F-los)<br>
 
 ## 프로젝트 소개
 
@@ -17,88 +19,185 @@
 
 ## 기술 스택
 
-Backend: TypeScript, Express.js, PrismaORM<br>
-Database: PostgreSQL<br>
-공통 Tool: Git & Github, Discord<br>
+<table>
+  <tr>
+    <th>Category</th>
+    <th>Stack</th>
+    <th align="right">Version</th>
+  </tr>
+  <tr>
+    <td>Language</td>
+    <td>TypeScript</td>
+    <td align="right">5.9.2</td>
+  </tr>
+  <tr>
+    <td>Runtime</td>
+    <td>Node.js</td>
+    <td align="right">22.17.0</td>
+  </tr>
+  <tr>
+    <td>Framework</td>
+    <td>Express.js</td>
+    <td align="right">5.1.0</td>
+  </tr>
+  <tr>
+    <td>ORM</td>
+    <td>Prisma ORM</td>
+    <td align="right">6.14.0</td>
+  </tr>
+  <tr>
+    <td>Database</td>
+    <td>PostgreSQL</td>
+    <td align="right">17.5</td>
+  </tr>
+  <tr>
+    <td>Auth</td>
+    <td>Bcrypt</td>
+    <td align="right">6.0.0</td>
+  </tr>
+  <tr>
+    <td>Validation</td>
+    <td>Zod</td>
+    <td align="right">4.0.17</td>
+  </tr>
+  <tr>
+    <td>File Upload</td>
+    <td>Multer</td>
+    <td align="right">2.0.2</td>
+  </tr>
+  <tr>
+    <td>Logger</td>
+    <td>Morgan</td>
+    <td align="right">1.10.1</td>
+  </tr>
+  <tr>
+    <td>Middleware</td>
+    <td>CORS</td>
+    <td align="right">2.8.5</td>
+  </tr>
+  <tr>
+    <td>Config</td>
+    <td>Dotenv</td>
+    <td align="right">17.2.1</td>
+  </tr>
+  <tr>
+    <td>API Docs</td>
+    <td>Swagger UI Express</td>
+    <td align="right">5.0.1</td>
+  </tr>
+  <tr>
+    <td>Test</td>
+    <td>Vitest / Supertest</td>
+    <td align="right">3.2.4 / 7.1.4</td>
+  </tr>
+  <tr>
+    <td>Lint / Format</td>
+    <td>ESLint / Prettier</td>
+    <td align="right">9.33.0 / 3.6.2</td>
+  </tr>
+  <tr>
+    <td>Git Hook</td>
+    <td>Husky</td>
+    <td align="right">9.1.7</td>
+  </tr>
+  <tr>
+    <td>Package Manager</td>
+    <td>npm</td>
+    <td align="right">10.x</td>
+  </tr>
+</table>
 
 ## 팀원별 구현 기능 상세
 
-이상욱
+### 이상욱 <sub>운동기록(조회/정렬/검색)</sub>
+
 (자신이 개발한 기능에 대한 사진이나 gif 파일 첨부)
 
-김보경
+### 김보경 <sub>그룹 DB, 그룹(생성/수정/삭제)</sub>
+
 (자신이 개발한 기능에 대한 사진이나 gif 파일 첨부)
 
-엄규리
+### 엄규리 <sub>그룹(조회/정렬/검색)</sub>
+
 (자신이 개발한 기능에 대한 사진이나 gif 파일 첨부)
 
-박형익
+### 박형익 <sub>그룹(배지/참여/추천)</sub>
+
 (자신이 개발한 기능에 대한 사진이나 gif 파일 첨부)
 
-김태회
+### 김태회 <sub>기록 DB, 운동기록(생성/수정/삭제)</sub>
+
 (자신이 개발한 기능에 대한 사진이나 gif 파일 첨부)
 
 ## 파일 구조
 
+<details>
+<summary>📂 파일 구조 보기</summary>
+
 ```
-src
- ┣ config
- ┃ ┗ db.ts
- ┣ controllers
- ┃ ┣ record
- ┃ ┃ ┗ create_record.controller.ts
- ┃ ┗ group
- ┃    ┣ create_group.controller.ts
- ┃    ┣ delete_group.controller.ts
- ┃    ┣ update_group.controller.ts
- ┃    ┣ list_groups.controller.ts
- ┃    ┣ get_group.controller.ts
- ┃    ┣ recommend_group.controller.ts
- ┃    ┣ join_group.controller.ts
- ┃    ┗ leave_group.controller.ts
- ┣ middleware
- ┃ ┣ group.middleware.ts
- ┃ ┣ record.middleware.ts
- ┃ ┣ auth.middleware.ts
- ┃ ┗ error.middleware.ts
- ┣ models
- ┃ ┣ record.model.ts
- ┃ ┗ group.model.ts
- ┣ routes
- ┃ ┣ record.routes.ts
- ┃ ┗ group.routes.ts
- ┣ services
- ┃ ┣ record
- ┃ ┃ ┗ create_record.service.ts
- ┃ ┗ group
- ┃    ┣ create_group.service.ts
- ┃    ┣ delete_group.service.ts
- ┃    ┣ update_group.service.ts
- ┃    ┣ list_groups.service.ts
- ┃    ┣ get_group.service.ts
- ┃    ┣ recommend_group.service.ts
- ┃    ┣ join_group.service.ts
- ┃    ┣ leave_group.service.ts
- ┃    ┗ badge_evaluation.service.ts
- ┣ utils
- ┃ ┣ jwt.ts
- ┃ ┣ constants.ts
- ┃ ┗ logger.ts
- ┣ app.ts
- ┗ server.ts
-prisma
- ┣ schema.prisma
- ┗ seed.ts
-.env
-.env.example
-.gitignore
-.prettierrc
-app.js
-eslint.config.ts
-package.json
-tsconfig.json
-README.md
+.
+├── src
+│   ├── app.ts
+│   ├── config
+│   │   └── db.ts
+│   ├── controllers
+│   │   ├── auth.controller.ts
+│   │   ├── group
+│   │   ├── record.controller.ts
+│   │   └── user.controller.ts
+│   ├── generated
+│   ├── index.ts
+│   ├── middleware
+│   │   ├── auth.middleware.ts
+│   │   ├── error.middleware.ts
+│   │   └── validate.middleware.ts
+│   ├── models
+│   │   ├── auth
+│   │   ├── course.model.ts
+│   │   ├── error_response.model.ts
+│   │   ├── group
+│   │   ├── upload
+│   │   └── user.model.ts
+│   ├── routes
+│   │   ├── auth.routes.ts
+│   │   ├── group.routes.ts
+│   │   ├── record.routes.ts
+│   │   ├── timer.routes.ts
+│   │   ├── upload.route.ts
+│   │   ├── uploads
+│   │   └── user.routes.ts
+│   ├── services
+│   │   ├── auth.service.ts
+│   │   ├── group
+│   │   ├── record.service.ts
+│   │   └── user.service.ts
+│   ├── swagger
+│   │   ├── components
+│   │   ├── info
+│   │   ├── paths
+│   │   ├── server
+│   │   ├── swagger.yaml
+│   │   └── tags
+│   ├── tests
+│   │   ├── record.e2e.test.ts
+│   │   └── record.more.e2e.test.ts
+│   └── utils
+│       ├── auth.util.ts
+│       ├── discord.ts
+│       ├── mappers
+│       ├── password.ts
+│       └── timer.ts
+├── eslint.config.js
+├── tsconfig.json
+├── vitest.config.ts
+├── package-lock.json
+├── package.json
+├── seed.js
+├── uploads
+└── README.md
 ```
+
+</details>
 
 ## 구현 홈페이지
 

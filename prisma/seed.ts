@@ -10,13 +10,13 @@ async function main() {
     update: {},
     create: { name: BadgeType.PARTICIPATION_10, label: '참여자 10명 달성' },
   });
-  
+
   await prisma.badge.upsert({
     where: { name: BadgeType.RECORD_100 },
     update: {},
     create: { name: BadgeType.RECORD_100, label: '운동 기록 100개 달성' },
   });
-  
+
   await prisma.badge.upsert({
     where: { name: BadgeType.LIKE_100 },
     update: {},
@@ -24,7 +24,6 @@ async function main() {
   });
 }
 
-main()
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+main().finally(async () => {
+  await prisma.$disconnect();
+});

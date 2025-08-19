@@ -1,0 +1,24 @@
+parameters:
+  GroupId:
+    $ref: './parameters/GroupId.yaml'
+schemas:
+  Group:
+    $ref: './schemas/Group.yaml'
+  Auth:
+    $ref: './schemas/Auth.yaml'
+examples:
+  GroupExample:
+    $ref: './examples/GroupExample.yaml'
+  AuthExample:
+    $ref: './examples/AuthExample.yaml'
+responses:
+  400_BadRequest:
+    $ref: './responses/400_BadRequest.yaml'
+  404_NotFound:
+    $ref: './responses/404_NotFound.yaml'
+  500_InternalServerError:
+    $ref: './responses/500_InternalServerError.yaml'
+  401_Unauthorized:
+    $ref: './responses/401_Unauthorized.yaml'
+  403_Forbidden:
+    $ref: './responses/403_Forbidden.yaml'

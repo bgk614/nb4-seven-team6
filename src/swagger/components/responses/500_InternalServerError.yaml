@@ -1,0 +1,12 @@
+description: 500 서버 오류
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          example: 500
+        message:
+          type: string
+          example: 알 수 없는 서버 오류가 발생했습니다.
