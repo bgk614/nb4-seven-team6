@@ -2,7 +2,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -16,9 +15,6 @@ enum BadgeType {
   RECORD_100
 }
 
-/**
- * 프론트 enum: run, bike, swim
- */
 enum ExerciseType {
   run
   bike
@@ -28,7 +24,7 @@ enum ExerciseType {
 }
 
 model Group {
-  id                 Int           @id @default(autoincrement())
+  id                 Int      @id @default(autoincrement())
   ownerParticipantId Int?
   name               String
   description        String
@@ -36,9 +32,9 @@ model Group {
   goalRep            Int
   discordWebhookUrl  String
   discordInviteUrl   String
-  likeCount          Int           @default(0)
-  createdAt          DateTime      @default(now())
-  updatedAt          DateTime      @updatedAt
+  likeCount          Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 
   owner        Participant?  @relation("GroupOwner", fields: [ownerParticipantId], references: [id], onDelete: Restrict)
   participants Participant[]
@@ -50,15 +46,15 @@ model Group {
 }
 
 model Participant {
-  id         Int        @id @default(autoincrement())
-  groupId    Int
-  nickname   String
-  password   String
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
+  id        Int      @id @default(autoincrement())
+  groupId   Int
+  nickname  String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  group      Group      @relation(fields: [groupId], references: [id], onDelete: Cascade)
-  ownedGroup Group[]    @relation("GroupOwner")
+  group      Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  ownedGroup Group[]  @relation("GroupOwner")
   records    Record[]
 
   @@unique([groupId, nickname], name: "groupId_nickname")
@@ -78,19 +74,19 @@ model Badge {
 }
 
 model Record {
-  id            Int           @id @default(autoincrement())
+  id            Int          @id @default(autoincrement())
   groupId       Int
   participantId Int
   exercise      ExerciseType
   description   String?
-  seconds       Int           // 실제 운동한 시간(초)
+  seconds       Int
   distanceKm    Float?
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
 
-  group         Group         @relation(fields: [groupId], references: [id], onDelete: Cascade)
-  participant   Participant   @relation(fields: [participantId], references: [id], onDelete: Cascade)
-  photos        RecordPhoto[]
+  group       Group         @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  participant Participant   @relation(fields: [participantId], references: [id], onDelete: Cascade)
+  photos      RecordPhoto[]
 
   @@index([groupId])
   @@index([participantId])
@@ -103,7 +99,7 @@ model RecordPhoto {
   recordId Int
   url      String
 
-  record   Record @relation(fields: [recordId], references: [id], onDelete: Cascade)
+  record Record @relation(fields: [recordId], references: [id], onDelete: Cascade)
 
   @@index([recordId])
   @@map("record_photos")

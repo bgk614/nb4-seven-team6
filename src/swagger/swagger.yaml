@@ -1,0 +1,16 @@
+openapi: 3.0.4
+
+info:
+  $ref: './info/index.yaml'
+
+servers:
+  $ref: './server/index.yaml'
+
+tags:
+  $ref: './tags/index.yaml'
+
+paths:
+  $ref: './paths/index.yaml'
+
+components:
+  $ref: './components/index.yaml'

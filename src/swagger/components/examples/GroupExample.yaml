@@ -1,0 +1,9 @@
+name: '100KM 달성 챌린지'
+description: '같이 달려서 100KM 완주!'
+photoUrl: 'https://example.com/image.png'
+goalRep: 10
+discordWebhookUrl: 'https://discord.com/webhook/123'
+discordInviteUrl: 'https://discord.gg/abc'
+tags: ['러닝', '100KM']
+nickname: '닉네임'
+password: '123456'

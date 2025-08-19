@@ -1,6 +1,11 @@
 node_modules/
-/src/generated/prisma
-.env
+.vscode/
 test
+/src/generated
 .env.claude/
+.env
+.DS_Store
 package-lock.json
+dist/
+uploads/
+prisma/migrations/
