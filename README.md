@@ -3,6 +3,7 @@
 ## [🔗 노션](https://www.notion.so/24cb1b4efe4d80dc818cf37149e2f65b)
 
 ## 팀원 구성
+
 이상욱 (https://github.com/NewL1f3)<br>
 김보경 (https://github.com/bgk614)<br>
 엄규리 (https://github.com/ammgree)<br>
@@ -10,10 +11,12 @@
 김태회 (https://github.com/F-los)<br>
 
 ## 프로젝트 소개
+
 운동 인증 커뮤니티 서비스의 백엔드 시스템 구축<br>
 프로젝트 기간: 2025.08.11 ~ 2025.08.29<br>
 
 ## 기술 스택
+
 Backend: TypeScript, Express.js, PrismaORM<br>
 Database: PostgreSQL<br>
 공통 Tool: Git & Github, Discord<br>
@@ -98,7 +101,9 @@ README.md
 ```
 
 ## 구현 홈페이지
+
 (개발한 홈페이지에 대한 링크 게시)
 
 ## 프로젝트 회고록
+
 (제작한 발표자료 링크 혹은 첨부파일 첨부)
