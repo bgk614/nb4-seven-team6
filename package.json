@@ -16,7 +16,8 @@
     "test": "vitest --config vitest.config.ts",
     "test:run": "vitest run --config vitest.config.ts",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepare": "husky"
   },
   "dependencies": {
     "@apidevtools/swagger-parser": "^12.0.0",
@@ -54,6 +55,8 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "globals": "^16.3.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.5",
     "nodemon": "^3.1.10",
     "prettier": "3.6.2",
     "supertest": "^7.1.4",
@@ -63,13 +66,15 @@
     "vitest": "^3.2.4"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown",
-    "*.prisma": [
+    "*.{js,ts}": [
+      "npm run lint --fix",
+      "prettier --write"
+    ],
+    "prisma/schema.prisma": [
       "npx prisma format"
     ],
-    "*.{ts,tsx,js,json,md,yaml}": [
-      "prettier --write",
-      "eslint --fix"
+    "*.{yml,yaml}": [
+      "prettier --write"
     ]
   }
 }
