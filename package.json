@@ -11,7 +11,7 @@
   },
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsc",
+    "build": "tsc && tsc-alias",
     "start": "node dist/index.js",
     "test": "vitest --config vitest.config.ts",
     "test:run": "vitest run --config vitest.config.ts",
@@ -39,8 +39,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
-    "@types/bcryptjs": "^2.4.6",
     "@types/bcrypt": "^6.0.0",
+    "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/js-yaml": "^4.0.9",

@@ -5,7 +5,6 @@ import { getGroupByIdController } from '../controllers/group/get_group_by_id.con
 import { recommendGroup } from '../controllers/group/recommend_group.controller';
 import { joinGroup } from '../controllers/group/join_group.controller';
 import { leaveGroup } from '../controllers/group/leave_group.controller';
-import { createGroupController } from '../controllers/group/create_group.controller.ts';
 import { validateGroupQuery, validateID } from '../middleware/group.middleware';
 import * as Params from '../models/group/index';
 import * as Controller from '../controllers/group/index';
