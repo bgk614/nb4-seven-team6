@@ -1,40 +1,32 @@
+// src/app.ts
 import express from 'express';
 import dotenv from 'dotenv';
-import swaggerUi from 'swagger-ui-express';
-import SwaggerParser from '@apidevtools/swagger-parser';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import cors from 'cors';
+import morgan from 'morgan';
+
 import { groupRouter } from './routes/group.routes';
 import { uploadRouter } from './routes/upload.route';
 import { errorMiddleware } from './middleware/error.middleware';
+import timerRoutes from './routes/timer.routes';
+import recordRoutes from './routes/record.routes';
 
 dotenv.config();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 export const app = express();
 
 app.use(express.json());
 
-app.use(express.json());
+app.use(cors());
+app.use(express.json({ limit: '10mb' }));
+app.use(morgan('dev'));
+
 app.use('/uploads', express.static('uploads'));
-app.use('/groups', groupRouter);
 app.use('/uploads', uploadRouter);
+app.use('/groups', groupRouter);
+app.get('/health', (_req, res) => res.send('ok'));
+app.use('/api/timer', timerRoutes);
+app.use('/api', recordRoutes);
 
-(async () => {
-  try {
-    const swaggerPath = path.join(__dirname, 'swagger', 'swagger.yaml');
-    const api = await SwaggerParser.dereference(swaggerPath);
+app.use(errorMiddleware);
 
-    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(api));
-
-    const port = process.env.PORT ?? '6123';
-    app.listen(port, () => {
-      console.log(`서버 실행됨: http://localhost:${port}`);
-      console.log(`스웨거 문서: http://localhost:${port}/api-docs`);
-    });
-  } catch (err) {
-    console.error('Swagger load error:', err);
-  }
-})();
+export default app;
