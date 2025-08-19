@@ -8,3 +8,4 @@ test
 package-lock.json
 dist/
 uploads/
+prisma/migrations/
