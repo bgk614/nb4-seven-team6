@@ -17,13 +17,12 @@ groupRouter
   .get(validateGroupQuery, getGroupsController) // 목록 조회
   .post(validate(Params.CreateGroupSchema), Controller.createGroupController);
 
-groupRouter.get('/:id', validateID, getGroupByIdController); // 상세 조회
-
 groupRouter.post('/:groupId/recommend', recommendGroup); // 추천수 증가
 groupRouter.post('/:groupId/join', joinGroup); // 그룹 참여
 groupRouter.post('/:groupId/leave', leaveGroup); // 그룹 탈퇴
 
 groupRouter
   .route('/:groupId')
+  .get(validateID, getGroupByIdController) // 상세 조회
   .patch(validate(Params.UpdateGroupSchema), Controller.updateGroupController)
   .delete(Controller.deleteGroupController);

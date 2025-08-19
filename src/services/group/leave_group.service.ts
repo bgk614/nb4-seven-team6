@@ -17,7 +17,7 @@ export async function leaveGroup(
   }
 
   // 트랜잭션으로 순서 보장 (기록을 먼저 삭제한 후 참가자 삭제)
-  return await prisma.$transaction(async (tx) => {
+  return await prisma.$transaction(async (tx: any) => {
     // 참가자 존재 확인
     const participant = await tx.participant.findUnique({
       where: { groupId_nickname: { groupId, nickname } },
