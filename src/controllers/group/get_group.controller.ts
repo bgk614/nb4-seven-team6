@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getGroupsService } from '../../services/group/get_group.service';
+import { getGroupsService } from '../../services/group/get_group.service.js';
 
 // 그룹 목록 조회
 export async function getGroupsController(req: Request, res: Response) {

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { deleteGroupService } from '../../services/group';
+import { deleteGroupService } from '../../services/group/delete_group.service.js';
 
 interface DeleteGroupRequest {
   nickname: string;

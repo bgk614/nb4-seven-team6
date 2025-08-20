@@ -1,8 +1,13 @@
 // src/routes/record.routes.ts
 
 import { Router } from 'express';
-import { registerRecord } from '../controllers/record.controller';
 
+import {
+  registerRecord,
+  // getAllRecords,
+  // getRecordRankings,
+  // getRecordById,
+} from '../controllers/record.controller.js';
 const r = Router();
 
 // 그룹별 운동 기록 등록
