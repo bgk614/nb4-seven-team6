@@ -1,0 +1,21 @@
+tags:
+  - 그룹
+summary: '그룹 수정'
+parameters:
+  - $ref: '../../components/index.yaml#/parameters/GroupId'
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        ref: '../../components/schemas/Group.yaml'
+        required:
+          - nickname
+          - password
+        example:
+          $ref: '../../components/index.yaml#/examples/GroupExample'
+responses:
+  '200':
+    description: '수정 성공'
+  default:
+    $ref: ../../components/responses/DefaultError.yaml

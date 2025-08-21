@@ -1,6 +1,6 @@
 import request from 'supertest';
 import app from '../index';
-import { PrismaClient } from '../../src/generated/prisma';
+import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import { describe, it, beforeAll, afterAll, expect, vi } from 'vitest';
 

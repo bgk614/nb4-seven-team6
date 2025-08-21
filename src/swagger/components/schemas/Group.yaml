@@ -1,0 +1,22 @@
+type: object
+properties:
+  name:
+    type: string
+  description:
+    type: string
+  photoUrl:
+    type: string
+  goalRep:
+    type: integer
+  discordWebhookUrl:
+    type: string
+  discordInviteUrl:
+    type: string
+  tags:
+    type: array
+    items:
+      type: string
+  nickname:
+    type: string
+  password:
+    type: string
