@@ -2,6 +2,7 @@ import express from 'express';
 
 import { getGroupsController } from '../controllers/group/get_group.controller';
 import { getGroupByIdController } from '../controllers/group/get_group_by_id.controller';
+import { getGroupMemRankController } from '@/controllers/group/get_group_mem_rank.controller';
 import { recommendGroup } from '../controllers/group/recommend_group.controller';
 import { joinGroup } from '../controllers/group/join_group.controller';
 import { leaveGroup } from '../controllers/group/leave_group.controller';
@@ -11,7 +12,6 @@ import * as Controller from '../controllers/group/index';
 import { validate } from '../middleware/validate.middleware';
 export const groupRouter = express.Router();
 
-// 그룹 목록/상세 조회
 groupRouter
   .route('/')
   .get(validateGroupQuery, getGroupsController) // 목록 조회
@@ -26,3 +26,5 @@ groupRouter
   .get(validateID, getGroupByIdController) // 상세 조회
   .patch(validate(Params.UpdateGroupSchema), Controller.updateGroupController)
   .delete(Controller.deleteGroupController);
+
+groupRouter.get('/:groupId/rank', validateID, getGroupMemRankController); // 랭킹 조회

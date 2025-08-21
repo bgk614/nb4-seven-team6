@@ -38,7 +38,7 @@ export function validateID(
   res: Response,
   next: NextFunction,
 ): void {
-  const id = parseInt(req.params.id);
+  const id = parseInt(req.params.groupId);
   if (isNaN(id)) {
     res.status(400).json({ message: 'ID는 숫자여야합니다.' });
     return;

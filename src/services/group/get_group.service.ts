@@ -45,7 +45,7 @@ export async function getGroupsService({
         },
         badges: {
           select: {
-            name: true,
+            type: true,
           },
         },
       },
