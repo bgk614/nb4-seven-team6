@@ -1,5 +1,5 @@
 import { Group } from '@prisma/client';
-import { GroupResponse } from '../../models/group';
+import { GroupResponse } from '../../models/group/group_response.dto.js';
 
 export const toGroupResponse = (group: Group): GroupResponse => ({
   id: group.id,

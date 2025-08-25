@@ -1,15 +1,18 @@
 import express from 'express';
 
-import { getGroupsController } from '../controllers/group/get_group.controller';
-import { getGroupByIdController } from '../controllers/group/get_group_by_id.controller';
-import { getGroupMemRankController } from '@/controllers/group/get_group_mem_rank.controller';
-import { recommendGroup } from '../controllers/group/recommend_group.controller';
-import { joinGroup } from '../controllers/group/join_group.controller';
-import { leaveGroup } from '../controllers/group/leave_group.controller';
-import { validateGroupQuery, validateID } from '../middleware/group.middleware';
-import * as Params from '../models/group/index';
-import * as Controller from '../controllers/group/index';
-import { validate } from '../middleware/validate.middleware';
+import { getGroupsController } from '../controllers/group/get_group.controller.js';
+import { getGroupByIdController } from '../controllers/group/get_group_by_id.controller.js';
+import { getGroupMemRankController } from '@/controllers/group/get_group_mem_rank.controller.js';
+import { recommendGroup } from '../controllers/group/recommend_group.controller.js';
+import { joinGroup } from '../controllers/group/join_group.controller.js';
+import { leaveGroup } from '../controllers/group/leave_group.controller.js';
+import {
+  validateGroupQuery,
+  validateID,
+} from '../middleware/group.middleware.js';
+import * as Params from '../models/group/index.js';
+import * as Controller from '../controllers/group/index.js';
+import { validate } from '../middleware/validate.middleware.js';
 export const groupRouter = express.Router();
 
 groupRouter

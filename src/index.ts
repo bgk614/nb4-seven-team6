@@ -2,7 +2,7 @@
 import swaggerUi from 'swagger-ui-express';
 import SwaggerParser from '@apidevtools/swagger-parser';
 import path from 'path';
-import app from './app';
+import app from './app.js';
 
 (async () => {
   try {

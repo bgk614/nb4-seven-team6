@@ -1,9 +1,9 @@
 // src/routes/timer.routes.ts
 
 import { Router } from 'express';
-import { prisma } from '../config/db';
-import { startTimer, stopTimer } from '../utils/timer';
-import { verifyPassword } from '../utils/password';
+import { prisma } from '../config/db.js';
+import { startTimer, stopTimer } from '../utils/timer.js';
+import { verifyPassword } from '../utils/password.js';
 
 const r = Router();
 

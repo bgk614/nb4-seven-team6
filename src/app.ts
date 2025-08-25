@@ -4,11 +4,11 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
 
-import { groupRouter } from './routes/group.routes';
-import { uploadRouter } from './routes/upload.route';
-import { errorMiddleware } from './middleware/error.middleware';
-import timerRoutes from './routes/timer.routes';
-import recordRoutes from './routes/record.routes';
+import { groupRouter } from './routes/group.routes.js';
+import { uploadRouter } from './routes/upload.route.js';
+import { errorMiddleware } from './middleware/error.middleware.js';
+import timerRoutes from './routes/timer.routes.js';
+import recordRoutes from './routes/record.routes.js';
 
 dotenv.config();
 
