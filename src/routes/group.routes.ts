@@ -2,6 +2,7 @@ import express from 'express';
 
 import { getGroupsController } from '../controllers/group/get_group.controller.js';
 import { getGroupByIdController } from '../controllers/group/get_group_by_id.controller.js';
+import { getGroupMemRankController } from '@/controllers/group/get_group_mem_rank.controller.js';
 import { recommendGroup } from '../controllers/group/recommend_group.controller.js';
 import { joinGroup } from '../controllers/group/join_group.controller.js';
 import { leaveGroup } from '../controllers/group/leave_group.controller.js';
@@ -14,13 +15,10 @@ import * as Controller from '../controllers/group/index.js';
 import { validate } from '../middleware/validate.middleware.js';
 export const groupRouter = express.Router();
 
-// 그룹 목록/상세 조회
 groupRouter
   .route('/')
   .get(validateGroupQuery, getGroupsController) // 목록 조회
   .post(validate(Params.CreateGroupSchema), Controller.createGroupController);
-
-groupRouter.get('/:id', validateID, getGroupByIdController); // 상세 조회
 
 groupRouter.post('/:groupId/recommend', recommendGroup); // 추천수 증가
 groupRouter.post('/:groupId/join', joinGroup); // 그룹 참여
@@ -28,5 +26,8 @@ groupRouter.post('/:groupId/leave', leaveGroup); // 그룹 탈퇴
 
 groupRouter
   .route('/:groupId')
+  .get(validateID, getGroupByIdController) // 상세 조회
   .patch(validate(Params.UpdateGroupSchema), Controller.updateGroupController)
   .delete(Controller.deleteGroupController);
+
+groupRouter.get('/:groupId/rank', validateID, getGroupMemRankController); // 랭킹 조회
