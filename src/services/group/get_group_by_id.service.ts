@@ -9,7 +9,7 @@ export async function getGroupByIdService(groupId: number) {
       where: { id: groupId },
       include: {
         tags: {
-          select: { name: true },
+          select: { id: true, name: true },
         },
         owner: {
           select: {
@@ -29,6 +29,7 @@ export async function getGroupByIdService(groupId: number) {
         },
         badges: {
           select: {
+            id: true,
             type: true,
           },
         },

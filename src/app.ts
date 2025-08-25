@@ -22,10 +22,11 @@ app.use(morgan('dev'));
 
 app.use('/uploads', express.static('uploads'));
 app.use('/uploads', uploadRouter);
+app.use('/images', uploadRouter);
 app.use('/groups', groupRouter);
+app.use('/', recordRoutes);
 app.get('/health', (_req, res) => res.send('ok'));
 app.use('/api/timer', timerRoutes);
-app.use('/api', recordRoutes);
 
 app.use(errorMiddleware);
 
