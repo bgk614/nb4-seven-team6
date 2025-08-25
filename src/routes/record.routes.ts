@@ -6,7 +6,8 @@ import {
   // getAllRecords,
   // getRecordRankings,
   // getRecordById,
-} from '../controllers/record.controller';
+
+} from '../controllers/record.controller.js';
 const r = Router();
 
 // 그룹별 운동 기록 등록

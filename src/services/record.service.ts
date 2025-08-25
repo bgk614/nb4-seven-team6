@@ -1,6 +1,6 @@
-import { prisma } from '../config/db';
-import { readStopped, consume } from '../utils/timer';
-import { sendDiscordWebhook } from '../utils/discord';
+import { prisma } from '../config/db.js';
+import { readStopped, consume } from '../utils/timer.js';
+import { sendDiscordWebhook } from '../utils/discord.js';
 
 // 사진 URL 검증 (최대 3장)
 export function validatePhotos(photos: unknown) {
