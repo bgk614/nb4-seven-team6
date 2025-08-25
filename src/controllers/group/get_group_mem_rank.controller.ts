@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getGroupMemRankService } from '../../services/group/get_group_mem_rank.service';
+import { getGroupMemRankService } from '../../services/group/get_group_mem_rank.service.js';
 
 export async function getGroupMemRankController(req: Request, res: Response) {
   try {
