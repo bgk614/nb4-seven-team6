@@ -3,9 +3,7 @@ import { prisma } from '../../config/db.js';
 import { evaluateAndAwardBadges } from './badge_evaluation.service.js';
 
 // 그룹 추천수를 1 증가시키고 배지 조건 확인
-export async function recommendGroup(
-  groupId: number,
-): Promise<{ id: number; likeCount: number }> {
+export async function recommendGroup(groupId: number): Promise<{ id: number; likeCount: number }> {
   return await prisma.$transaction(async (tx) => {
     const group = await tx.group.update({
       where: { id: groupId },
@@ -18,3 +16,11 @@ export async function recommendGroup(
     return group;
   });
 }
+
+export const unlikeGroupService = async (groupId: number) => {
+  const group = await prisma.group.update({
+    where: { id: groupId },
+    data: { likeCount: { decrement: 1 } },
+  });
+  return { success: true, likeCount: group.likeCount };
+};
