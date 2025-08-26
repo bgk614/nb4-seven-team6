@@ -2,6 +2,7 @@ export * from './create_group.controller.js';
 export * from './delete_group.controller.js';
 export * from './get_group_by_id.controller.js';
 export * from './get_group.controller.js';
+export * from './get_group_mem_rank.controller.js';
 export * from './update_group.controller.js';
 export * from './recommend_group.controller.js';
 export * from './join_group.controller.js';
