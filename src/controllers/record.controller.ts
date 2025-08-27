@@ -16,8 +16,8 @@ export const registerRecord = async (
   try {
     const groupId = Number(req.params.groupId);
     const {
-      authorNickname,
-      authorPassword,
+      nickname,
+      password,
       exerciseType,
       description,
       time,
@@ -27,13 +27,7 @@ export const registerRecord = async (
     } = req.body ?? {};
 
     // 필수 필드 검증
-    if (
-      !groupId ||
-      !authorNickname ||
-      !authorPassword ||
-      !exerciseType ||
-      time == null
-    ) {
+    if (!groupId || !nickname || !password || !exerciseType || time == null) {
       throw Object.assign(new Error('Missing required fields'), {
         status: 400,
       });
@@ -41,16 +35,13 @@ export const registerRecord = async (
 
     // 그룹 내 닉네임/비번 검증
     const participant = await prisma.participant.findFirst({
-      where: { groupId, nickname: authorNickname },
+      where: { groupId, nickname },
     });
     if (!participant) {
       throw Object.assign(new Error('Invalid credentials'), { status: 401 });
     }
 
-    const ok = await verifyPassword(
-      String(authorPassword),
-      participant.password,
-    );
+    const ok = await verifyPassword(String(password), participant.password);
     if (!ok) {
       throw Object.assign(new Error('Invalid credentials'), { status: 401 });
     }

@@ -18,16 +18,16 @@ requestBody:
       schema:
         type: object
         required:
-          - authorNickname
-          - authorPassword
+          - nickname
+          - password
           - exerciseType
           - time
         properties:
-          authorNickname:
+          nickname:
             type: string
             description: 그룹 내 등록된 닉네임
             example: '홍길동'
-          authorPassword:
+          password:
             type: string
             description: 닉네임에 해당하는 비밀번호
             example: 'mypassword123'
