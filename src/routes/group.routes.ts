@@ -8,7 +8,10 @@ export const groupRouter = express.Router();
 groupRouter
   .route('/')
   .get(Middleware.validateGroupQuery, Controller.getGroupsController) // 그룹 목록 조회
-  .post(Middleware.validate(Params.CreateGroupSchema), Controller.createGroupController); // 그룹 생성
+  .post(
+    Middleware.validate(Params.CreateGroupSchema),
+    Controller.createGroupController,
+  ); // 그룹 생성
 
 groupRouter.post('/:groupId/likes', Controller.recommendGroup); // 그룹 추천
 groupRouter.delete('/:groupId/likes', Controller.removeLike); // 그룹 추천 삭제
@@ -21,7 +24,14 @@ groupRouter
 groupRouter
   .route('/:groupId')
   .get(Middleware.validateID, Controller.getGroupByIdController) // 상세 조회
-  .patch(Middleware.validate(Params.UpdateGroupSchema), Controller.updateGroupController) // 그룹 업데이트
+  .patch(
+    Middleware.validate(Params.UpdateGroupSchema),
+    Controller.updateGroupController,
+  ) // 그룹 업데이트
   .delete(Controller.deleteGroupController); // 그룹 삭제
 
-groupRouter.get('/:groupId/rank', Middleware.validateID, Controller.getGroupMemRankController); // 랭킹 조회
+groupRouter.get(
+  '/:groupId/rank',
+  Middleware.validateID,
+  Controller.getGroupMemRankController,
+); // 랭킹 조회
