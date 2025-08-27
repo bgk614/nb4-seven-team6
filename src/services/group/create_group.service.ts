@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import { CreateGroupRequest } from '@/models/group/create_group.dto.js';
 import { GroupResponse } from '@/models/group/group_response.dto.js';
 import { hashPassword } from '@/utils/auth.util.js';
+import { toGroupResponse } from '@/utils/mappers/group.mapper.js';
 
 const prisma = new PrismaClient();
 
@@ -33,7 +34,7 @@ export const createGroupService = async (
         discordInviteUrl,
         participants: {
           create: {
-            nickname: nickname,
+            nickname,
             password: hashedPassword,
           },
         },
@@ -52,9 +53,9 @@ export const createGroupService = async (
     const updatedGroup = await tx.group.update({
       where: { id: group.id },
       data: { ownerParticipantId: group.participants[0].id },
-      include: { participants: true, tags: true },
+      include: { participants: true, tags: true, badges: true },
     });
 
-    return updatedGroup as unknown as GroupResponse;
+    return toGroupResponse(updatedGroup);
   });
 };
