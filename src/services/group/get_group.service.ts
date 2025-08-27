@@ -10,7 +10,7 @@ export async function getGroupsService({
   order = 'desc',
   orderBy = 'createdAt',
   search = '',
-}) {
+}): Promise<{ data: GroupResponse[]; total: number }> {
   try {
     const where = search
       ? {
