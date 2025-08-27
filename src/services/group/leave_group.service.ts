@@ -2,7 +2,10 @@
 import { prisma } from '../../config/db.js';
 import bcrypt from 'bcryptjs';
 
-export async function leaveGroup(groupId: number, payload: { nickname: string; password: string }): Promise<boolean> {
+export async function leaveGroup(
+  groupId: number,
+  payload: { nickname: string; password: string },
+): Promise<boolean> {
   const { nickname, password } = payload;
 
   if (!nickname || !password) {
@@ -25,7 +28,10 @@ export async function leaveGroup(groupId: number, payload: { nickname: string; p
     }
 
     // 비밀번호 검증
-    const isValidPassword = await bcrypt.compare(password, participant.password);
+    const isValidPassword = await bcrypt.compare(
+      password,
+      participant.password,
+    );
     if (!isValidPassword) {
       const error = new Error('비밀번호 불일치') as any;
       error.status = 401;
@@ -42,7 +48,9 @@ export async function leaveGroup(groupId: number, payload: { nickname: string; p
         return true;
       } else {
         // 다른 멤버에게 오너 넘기기 (예: 가장 오래된 멤버)
-        const newOwner = group.participants.find((p) => p.id !== participant.id);
+        const newOwner = group.participants.find(
+          (p) => p.id !== participant.id,
+        );
         if (!newOwner) {
           const error = new Error('새 오너 지정 실패') as any;
           error.status = 500;
