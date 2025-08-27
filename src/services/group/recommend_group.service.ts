@@ -18,3 +18,11 @@ export async function recommendGroup(
     return group;
   });
 }
+
+export const unlikeGroupService = async (groupId: number) => {
+  const group = await prisma.group.update({
+    where: { id: groupId },
+    data: { likeCount: { decrement: 1 } },
+  });
+  return { success: true, likeCount: group.likeCount };
+};

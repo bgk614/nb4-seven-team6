@@ -11,12 +11,12 @@ export type UpdateGroupParamsType = z.infer<typeof UpdateGroupParams>;
 
 export const UpdateGroupSchema = z.object({
   body: z.object({
-    name: z.string().min(1),
+    name: z.string().min(1).optional(),
     description: z.string().optional(),
     photoUrl: z.string().url().optional(),
     discordWebhookUrl: z.string().url().optional(),
     discordInviteUrl: z.string().url().optional(),
-    goalRep: z.number().min(1),
+    goalRep: z.number().min(1).optional(),
     nickname: z.string().min(1),
     password: z.string().min(1),
     tags: z.array(z.string()).optional(),

@@ -25,13 +25,16 @@ const upload = multer({ storage });
 
 uploadRouter.post(
   '/',
-  upload.single('image'),
+  upload.array('files', 10),
   (req: Request, res: Response) => {
-    if (!req.file) {
-      return res.status(400).json({ message: 'No file uploaded' });
+    const files = req.files as Express.Multer.File[];
+    if (!files || files.length === 0) {
+      return res.status(400).json({ message: 'No files uploaded' });
     }
 
-    const fileUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
-    return res.json({ url: fileUrl });
+    const urls = files.map(
+      (file) => `${req.protocol}://${req.get('host')}/uploads/${file.filename}`,
+    );
+    return res.json({ urls });
   },
 );
