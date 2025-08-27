@@ -1,3 +1,3 @@
-export * from './create_group.service';
-export * from './update_group.service';
-export * from './delete_group.service';
+export * from './create_group.service.js';
+export * from './update_group.service.js';
+export * from './delete_group.service.js';

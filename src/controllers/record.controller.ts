@@ -1,11 +1,11 @@
 // src/controllers/record.controller.ts
-import { prisma } from '../config/db';
-import { verifyPassword } from '../utils/password';
+import { prisma } from '../config/db.js';
+import { verifyPassword } from '../utils/password.js';
 import {
   createRecord,
   validatePhotos,
   enforceTimer,
-} from '../services/record.service'; // ✅ validateExercise 제거
+} from '../services/record.service.js'; // ✅ validateExercise 제거
 
 export const registerRecord = async (req: any, res: any, next: any) => {
   try {

@@ -1,7 +1,8 @@
 import { PrismaClient } from '@prisma/client';
-import { UpdateGroupRequest, GroupResponse } from '../../models/group';
-import { verifyOwner } from '../../utils/auth.util';
-import { toGroupResponse } from '../../utils/mappers/group.mapper';
+import { UpdateGroupRequest } from '../../models/group/update_group.dto.js';
+import { GroupResponse } from '../../models/group/group_response.dto.js';
+import { verifyOwner } from '../../utils/auth.util.js';
+import { toGroupResponse } from '../../utils/mappers/group.mapper.js';
 
 const prisma = new PrismaClient();
 
