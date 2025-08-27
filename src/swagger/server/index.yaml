@@ -1,4 +1,2 @@
-- url: http://localhost:6123
-  description: 로컬 서버
-- url: SERVER_URL
-  description: 원격 서버
+- url: http://3.37.133.27:6123
+  description: EC2 서버
