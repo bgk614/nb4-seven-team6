@@ -5,6 +5,7 @@ import { toGroupResponse } from '@/utils/mappers/group.mapper.js';
 const prisma = new PrismaClient();
 
 // 그룹 상세 조회
+
 export async function getGroupByIdService(
   groupId: number,
 ): Promise<GroupResponse | null> {

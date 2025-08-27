@@ -16,7 +16,16 @@ export async function getGroupsController(req: Request, res: Response) {
       orderBy,
       search,
     });
-    res.json(result);
+    // 프론트엔드가 기대하는 형태로 변환
+    const transformedData = {
+      ...result,
+      data: result.data.map((group) => ({
+        ...group,
+        tags: group.tags.map((tag) => tag.name),
+        badges: group.badges.map((badge) => badge.type),
+      })),
+    };
+    res.json(transformedData);
   } catch (e: any) {
     res.status(500).json({ message: e.message });
   }

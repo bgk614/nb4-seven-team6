@@ -6,6 +6,15 @@
     $ref: './group/update_group.yaml'
   delete:
     $ref: './group/delete_group.yaml'
+/groups/{groupId}/records:
+  post:
+    $ref: './record/create_record.yaml'
+/api/timer/start:
+  post:
+    $ref: './timer/start_timer.yaml'
+/api/timer/stop:
+  post:
+    $ref: './timer/stop_timer.yaml'
 /uploads:
   post:
     $ref: './upload/index.yaml'

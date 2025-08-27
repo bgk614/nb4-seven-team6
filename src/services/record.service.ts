@@ -85,22 +85,30 @@ export async function createRecord(opts: {
   });
 
   const group = await prisma.group.findUnique({ where: { id: opts.groupId } });
-  if (group?.discordWebhookUrl) {
-    const lines = [
-      `**새 운동 기록 등록!**`,
-      `그룹: ${group.name} (#${group.id})`,
-      `닉네임: ${record.participant.nickname}`,
-      `종목: ${record.exercise}`,
-      `시간: ${Math.floor(record.seconds / 60)}분 ${record.seconds % 60}초`,
-      ...(record.distanceKm != null
-        ? [`거리: ${record.distanceKm.toFixed(2)} km`]
-        : []),
-      ...(record.description ? [`설명: ${record.description}`] : []),
-      ...(record.photos?.length ? [`사진 수: ${record.photos.length}`] : []),
-    ];
-    await sendDiscordWebhook(group.discordWebhookUrl, {
-      content: lines.join('\n'),
-    });
+  if (
+    group?.discordWebhookUrl &&
+    group.discordWebhookUrl.startsWith('https://discord.com/api/webhooks/')
+  ) {
+    try {
+      const lines = [
+        `**새 운동 기록 등록!**`,
+        `그룹: ${group.name} (#${group.id})`,
+        `닉네임: ${record.participant.nickname}`,
+        `종목: ${record.exercise}`,
+        `시간: ${Math.floor(record.seconds / 60)}분 ${record.seconds % 60}초`,
+        ...(record.distanceKm != null
+          ? [`거리: ${record.distanceKm.toFixed(2)} km`]
+          : []),
+        ...(record.description ? [`설명: ${record.description}`] : []),
+        ...(record.photos?.length ? [`사진 수: ${record.photos.length}`] : []),
+      ];
+      await sendDiscordWebhook(group.discordWebhookUrl, {
+        content: lines.join('\n'),
+      });
+    } catch (error) {
+      // Discord 웹훅 실패는 기록 생성을 방해하지 않음
+      console.warn('Discord webhook failed:', error);
+    }
   }
 
   return record;
