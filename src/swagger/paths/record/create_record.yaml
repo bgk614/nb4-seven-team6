@@ -1,0 +1,133 @@
+tags:
+  - 운동 기록
+summary: 운동 기록 등록
+description: |
+  그룹에 운동 기록을 등록합니다.
+  - 닉네임과 비밀번호로 그룹 내 인증을 진행합니다
+  - 타이머를 통해 측정된 실제 운동 시간만 입력 가능합니다
+  - 사진은 최대 3장까지 업로드할 수 있습니다
+  - 새로운 기록 등록 시 그룹의 디스코드 웹훅으로 알림이 전송됩니다
+
+parameters:
+  - $ref: '../../components/parameters/GroupId.yaml'
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - authorNickname
+          - authorPassword
+          - exerciseType
+          - time
+        properties:
+          authorNickname:
+            type: string
+            description: 그룹 내 등록된 닉네임
+            example: '홍길동'
+          authorPassword:
+            type: string
+            description: 닉네임에 해당하는 비밀번호
+            example: 'mypassword123'
+          exerciseType:
+            type: string
+            enum: [run, bike, swim]
+            description: 운동 종류
+            example: 'run'
+          description:
+            type: string
+            description: 운동에 대한 설명
+            example: '한강공원에서 조깅했습니다'
+          time:
+            type: number
+            minimum: 1
+            description: 운동 시간 (초 단위)
+            example: 1800
+          distance:
+            type: number
+            minimum: 0
+            description: 운동 거리 (km 단위, 선택사항)
+            example: 5.2
+          photos:
+            type: array
+            maxItems: 3
+            items:
+              type: string
+              format: uri
+            description: 운동 관련 사진 URL (최대 3장)
+            example:
+              [
+                'https://example.com/photo1.jpg',
+                'https://example.com/photo2.jpg',
+              ]
+          timerId:
+            type: string
+            description: 서버 타이머 ID (타이머 사용 시 필수)
+            example: 'timer123'
+
+responses:
+  '201':
+    description: 운동 기록이 성공적으로 등록됨
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: 생성된 기록 ID
+              example: 123
+            exerciseType:
+              type: string
+              description: 운동 종류
+              example: 'run'
+            description:
+              type: string
+              description: 운동 설명
+              example: '한강공원에서 조깅했습니다'
+            time:
+              type: number
+              description: 운동 시간 (초)
+              example: 1800
+            distance:
+              type: number
+              description: 운동 거리 (km)
+              example: 5.2
+            photos:
+              type: array
+              items:
+                type: string
+                format: uri
+              description: 업로드된 사진 URL 목록
+              example: ['https://example.com/photo1.jpg']
+            author:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 456
+                nickname:
+                  type: string
+                  example: '홍길동'
+            createdAt:
+              type: number
+              description: 생성 시간 (Unix timestamp)
+              example: 1703123456789
+            updatedAt:
+              type: number
+              description: 수정 시간 (Unix timestamp)
+              example: 1703123456789
+
+  '400':
+    $ref: '../../components/responses/400_BadRequest.yaml'
+
+  '401':
+    $ref: '../../components/responses/401_Unauthorized.yaml'
+
+  '404':
+    $ref: '../../components/responses/404_NotFound.yaml'
+
+  '500':
+    $ref: '../../components/responses/500_InternalServerError.yaml'
