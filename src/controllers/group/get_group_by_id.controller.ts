@@ -11,7 +11,15 @@ export async function getGroupByIdController(req: Request, res: Response) {
         message: 'Group not found',
       });
     }
-    return res.json(group);
+
+    // 프론트엔드가 기대하는 형태로 변환
+    const transformedGroup = {
+      ...group,
+      tags: group.tags.map((tag) => tag.name),
+      badges: group.badges.map((badge) => badge.type),
+    };
+
+    return res.json(transformedGroup);
   } catch (e: any) {
     return res.status(500).json({ message: e.message });
   }

@@ -26,7 +26,7 @@ export async function getGroupsService({
       where,
       include: {
         tags: {
-          select: { name: true },
+          select: { id: true, name: true },
         },
         owner: {
           select: {
@@ -46,6 +46,7 @@ export async function getGroupsService({
         },
         badges: {
           select: {
+            id: true,
             type: true,
           },
         },
