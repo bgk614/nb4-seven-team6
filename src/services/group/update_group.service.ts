@@ -26,10 +26,15 @@ export const updateGroupService = async (
   const isOwner = await verifyOwner(nickname, password, owner);
   if (!isOwner) throw new Error('권한 없음');
 
+  // undefined 필드 제거
+  const cleanedData = Object.fromEntries(
+    Object.entries(updateData).filter(([_, v]) => v !== undefined),
+  );
+
   const updatedGroup = await prisma.group.update({
     where: { id: groupId },
     data: {
-      ...updateData,
+      ...cleanedData,
       tags: tags
         ? {
             set: [],
@@ -40,7 +45,11 @@ export const updateGroupService = async (
           }
         : undefined,
     },
-    include: { tags: true },
+    include: {
+      tags: true,
+      participants: true,
+      badges: true,
+    },
   });
 
   return toGroupResponse(updatedGroup);
