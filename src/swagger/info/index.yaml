@@ -1,11 +1,13 @@
 title: '초급팀플 운동 공유 웹 백엔드 개발'
 version: '1.0.0'
-description: '2025.08.11 - 2025.08.28'
+description: |
+  2025.08.11 - 2025.08.28
+  - [GitHub](https://github.com/NewL1f3/nb4-seven-team6) 
+  - [Web](https://nb4-seven-team6-front.vercel.app)
 
 contact:
   name: '6팀'
-  url: 'https://github.com/NewL1f3/nb4-seven-team6'
-  email: 'team6@example.com'
+  email: 'bgk614@gmail.com'
 
 license:
   name: MIT
