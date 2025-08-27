@@ -17,12 +17,15 @@ export async function getGroupsService({
           name: { contains: search, mode: 'insensitive' as const },
         }
       : {};
+    const orderByOption =
+      orderBy === 'participantCount'
+        ? { participants: { _count: order } as any } // 참가자 수 기준
+        : { [orderBy]: order as any }; // 나머지 필드 기준
+
     const groups = await prisma.group.findMany({
       skip: (page - 1) * limit,
       take: limit,
-      orderBy: {
-        [orderBy]: order,
-      },
+      orderBy: orderByOption,
       where,
       include: {
         tags: {
