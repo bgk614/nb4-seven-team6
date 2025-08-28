@@ -2,7 +2,8 @@ import { Router, Request, Response } from 'express';
 import multer, { StorageEngine } from 'multer';
 import path from 'path';
 import fs from 'fs';
-
+import dotenv from 'dotenv';
+dotenv.config();
 export const uploadRouter = Router();
 
 const UPLOADS_FOLDER = path.join(process.cwd(), 'uploads');
