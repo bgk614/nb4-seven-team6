@@ -4,11 +4,11 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
 
-import { groupRouter } from './routes/group.routes';
-import { uploadRouter } from './routes/upload.route';
-import { errorMiddleware } from './middleware/error.middleware';
-import timerRoutes from './routes/timer.routes';
-import recordRoutes from './routes/record.routes';
+import { groupRouter } from './routes/group.routes.js';
+import { uploadRouter } from './routes/upload.route.js';
+import { errorMiddleware } from './middleware/error.middleware.js';
+import timerRoutes from './routes/timer.routes.js';
+import recordRoutes from './routes/record.routes.js';
 
 dotenv.config();
 
@@ -22,10 +22,12 @@ app.use(morgan('dev'));
 
 app.use('/uploads', express.static('uploads'));
 app.use('/uploads', uploadRouter);
+app.use('/images', uploadRouter);
 app.use('/groups', groupRouter);
+
 app.get('/health', (_req, res) => res.send('ok'));
 app.use('/api/timer', timerRoutes);
-app.use('/api', recordRoutes);
+app.use('', recordRoutes);
 
 app.use(errorMiddleware);
 

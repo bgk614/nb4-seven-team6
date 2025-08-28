@@ -1,11 +1,9 @@
 node_modules/
 .vscode/
-test
 /src/generated
-.env.claude/
 .env
 .DS_Store
-package-lock.json
 dist/
 uploads/
 prisma/migrations/
+nb4-seven-team6-front-main

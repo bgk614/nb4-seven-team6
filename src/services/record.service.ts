@@ -1,6 +1,6 @@
-import { prisma } from '../config/db';
-import { readStopped, consume } from '../utils/timer';
-import { sendDiscordWebhook } from '../utils/discord';
+import { prisma } from '../config/db.js';
+import { readStopped, consume } from '../utils/timer.js';
+import { sendDiscordWebhook } from '../utils/discord.js';
 
 // 사진 URL 검증 (최대 3장)
 export function validatePhotos(photos: unknown) {
@@ -85,22 +85,61 @@ export async function createRecord(opts: {
   });
 
   const group = await prisma.group.findUnique({ where: { id: opts.groupId } });
-  if (group?.discordWebhookUrl) {
-    const lines = [
-      `**새 운동 기록 등록!**`,
-      `그룹: ${group.name} (#${group.id})`,
-      `닉네임: ${record.participant.nickname}`,
-      `종목: ${record.exercise}`,
-      `시간: ${Math.floor(record.seconds / 60)}분 ${record.seconds % 60}초`,
-      ...(record.distanceKm != null
-        ? [`거리: ${record.distanceKm.toFixed(2)} km`]
-        : []),
-      ...(record.description ? [`설명: ${record.description}`] : []),
-      ...(record.photos?.length ? [`사진 수: ${record.photos.length}`] : []),
-    ];
-    await sendDiscordWebhook(group.discordWebhookUrl, {
-      content: lines.join('\n'),
-    });
+  if (
+    group?.discordWebhookUrl &&
+    group.discordWebhookUrl.startsWith('https://discord.com/api/webhooks/')
+  ) {
+    try {
+      // 운동 종류별 이모지
+      const exerciseEmoji = {
+        run: '🏃‍♂️',
+        bike: '🚴‍♀️',
+        swim: '🏊‍♀️'
+      }[record.exercise] || '💪';
+
+      // 운동 종류 한글명
+      const exerciseKorean = {
+        run: '러닝',
+        bike: '사이클링',
+        swim: '수영'
+      }[record.exercise] || record.exercise;
+
+      // 시간 포맷팅
+      const timeFormatted = `${Math.floor(record.seconds / 60)}분 ${record.seconds % 60}초`;
+      
+      // Embed 메시지로 전송
+      const embedMessage = {
+        embeds: [{
+          title: `${exerciseEmoji} 새로운 운동 기록이 등록되었습니다!`,
+          description: `**${group.name}** 그룹에 새로운 기록이 추가되었습니다.`,
+          color: 0x00ff00, // 초록색
+          fields: [
+            { name: '👤 참가자', value: record.participant.nickname, inline: true },
+            { name: '🏃 운동 종류', value: exerciseKorean, inline: true },
+            { name: '⏱️ 운동 시간', value: `${timeFormatted} (${record.seconds}초)`, inline: true },
+            ...(record.distanceKm != null ? [
+              { name: '📍 거리', value: `${record.distanceKm.toFixed(2)} km`, inline: true }
+            ] : []),
+            ...(record.description ? [
+              { name: '📝 설명', value: record.description, inline: false }
+            ] : []),
+            ...(record.photos?.length ? [
+              { name: '📸 사진', value: `${record.photos.length}장의 사진이 업로드되었습니다`, inline: true }
+            ] : [])
+          ],
+          timestamp: new Date().toISOString(),
+          footer: {
+            text: `그룹 ID: ${group.id} | 기록 ID: ${record.id}`,
+            icon_url: group.photoUrl || undefined
+          }
+        }]
+      };
+
+      await sendDiscordWebhook(group.discordWebhookUrl, embedMessage);
+    } catch (error) {
+      // Discord 웹훅 실패는 기록 생성을 방해하지 않음
+      console.warn('Discord webhook failed:', error);
+    }
   }
 
   return record;

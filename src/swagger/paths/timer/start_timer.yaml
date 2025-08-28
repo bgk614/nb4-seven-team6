@@ -1,0 +1,57 @@
+tags:
+  - 타이머
+summary: 타이머 시작
+description: |
+  운동 시간 측정을 위한 타이머를 시작합니다.
+  - 그룹 내 등록된 닉네임과 비밀번호로 인증합니다
+  - 타이머 ID를 발급하여 서버에서 시간을 측정합니다
+  - 발급받은 타이머 ID는 운동 기록 등록 시 사용됩니다
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - groupId
+          - nickname
+          - password
+        properties:
+          groupId:
+            type: integer
+            description: 그룹 ID
+            example: 1
+          nickname:
+            type: string
+            description: 그룹 내 등록된 닉네임
+            example: '홍길동'
+          password:
+            type: string
+            description: 닉네임에 해당하는 비밀번호
+            example: 'mypassword123'
+
+responses:
+  '201':
+    description: 타이머가 성공적으로 시작됨
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            ok:
+              type: boolean
+              example: true
+            timerId:
+              type: string
+              description: 발급된 타이머 ID
+              example: 'abc123def456'
+
+  '400':
+    $ref: '../../components/responses/400_BadRequest.yaml'
+
+  '401':
+    $ref: '../../components/responses/401_Unauthorized.yaml'
+
+  '500':
+    $ref: '../../components/responses/500_InternalServerError.yaml'

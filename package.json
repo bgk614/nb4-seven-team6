@@ -7,7 +7,7 @@
   "type": "module",
   "main": "index.js",
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "ts-node prisma/seed.js"
   },
   "scripts": {
     "dev": "tsx watch src/index.ts",
@@ -17,7 +17,8 @@
     "test:run": "vitest run --config vitest.config.ts",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "seed": "prisma db seed"
   },
   "dependencies": {
     "@apidevtools/swagger-parser": "^12.0.0",
@@ -30,7 +31,6 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "express": "^5.1.0",
-    "js-yaml": "^4.1.0",
     "morgan": "^1.10.1",
     "multer": "^2.0.2",
     "prisma": "^6.13.0",
@@ -59,6 +59,7 @@
     "lint-staged": "^16.1.5",
     "prettier": "3.6.2",
     "supertest": "^7.1.4",
+    "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.16",
     "tsx": "^4.20.4",
     "typescript": "^5.9.2",
