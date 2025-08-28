@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { updateGroupService } from '../../services/group/update_group.service';
-import { UpdateGroupRequest } from '../../models/group/update_group.dto';
+import { updateGroupService } from '../../services/group/update_group.service.js';
+import { UpdateGroupRequest } from '../../models/group/update_group.dto.js';
 
 export const updateGroupController = async (
   req: Request<{ groupId: string }, {}, UpdateGroupRequest>,

@@ -1,0 +1,56 @@
+tags:
+  - 타이머
+summary: 타이머 종료
+description: |
+  시작된 타이머를 종료하고 실제 운동 시간을 반환합니다.
+  - 서버에서 정확한 운동 시간을 계산합니다
+  - 반환된 시간은 운동 기록 등록 시 사용할 수 있습니다
+  - 타이머는 한 번 종료되면 재사용할 수 없습니다
+
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - timerId
+        properties:
+          timerId:
+            type: string
+            description: 시작할 때 발급받은 타이머 ID
+            example: 'abc123def456'
+
+responses:
+  '200':
+    description: 타이머가 성공적으로 종료됨
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            ok:
+              type: boolean
+              example: true
+            elapsedSeconds:
+              type: integer
+              description: 측정된 운동 시간 (초 단위)
+              example: 1800
+            meta:
+              type: object
+              description: 타이머 메타데이터
+              properties:
+                groupId:
+                  type: integer
+                  description: 그룹 ID
+                  example: 1
+                participantId:
+                  type: integer
+                  description: 참가자 ID
+                  example: 123
+
+  '400':
+    $ref: '../../components/responses/400_BadRequest.yaml'
+
+  '500':
+    $ref: '../../components/responses/500_InternalServerError.yaml'

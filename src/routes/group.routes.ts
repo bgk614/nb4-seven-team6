@@ -1,29 +1,37 @@
 import express from 'express';
 
-import { getGroupsController } from '../controllers/group/get_group.controller';
-import { getGroupByIdController } from '../controllers/group/get_group_by_id.controller';
-import { recommendGroup } from '../controllers/group/recommend_group.controller';
-import { joinGroup } from '../controllers/group/join_group.controller';
-import { leaveGroup } from '../controllers/group/leave_group.controller';
-import { validateGroupQuery, validateID } from '../middleware/group.middleware';
-import * as Params from '../models/group/index';
-import * as Controller from '../controllers/group/index';
-import { validate } from '../middleware/validate.middleware';
+import * as Params from '../models/group/index.js';
+import * as Controller from '../controllers/group/index.js';
+import * as Middleware from '../middleware/index.js';
 export const groupRouter = express.Router();
 
-// 그룹 목록/상세 조회
 groupRouter
   .route('/')
-  .get(validateGroupQuery, getGroupsController) // 목록 조회
-  .post(validate(Params.CreateGroupSchema), Controller.createGroupController);
+  .get(Middleware.validateGroupQuery, Controller.getGroupsController) // 그룹 목록 조회
+  .post(
+    Middleware.validate(Params.CreateGroupSchema),
+    Controller.createGroupController,
+  ); // 그룹 생성
 
-groupRouter.get('/:id', validateID, getGroupByIdController); // 상세 조회
+groupRouter.post('/:groupId/likes', Controller.recommendGroup); // 그룹 추천
+groupRouter.delete('/:groupId/likes', Controller.removeLike); // 그룹 추천 삭제
 
-groupRouter.post('/:groupId/recommend', recommendGroup); // 추천수 증가
-groupRouter.post('/:groupId/join', joinGroup); // 그룹 참여
-groupRouter.post('/:groupId/leave', leaveGroup); // 그룹 탈퇴
+groupRouter
+  .route('/:groupId/participants')
+  .post(Controller.joinGroup) // 그룹 참여
+  .delete(Controller.leaveGroup); // 그룹 나가기
 
 groupRouter
   .route('/:groupId')
-  .patch(validate(Params.UpdateGroupSchema), Controller.updateGroupController)
-  .delete(Controller.deleteGroupController);
+  .get(Middleware.validateID, Controller.getGroupByIdController) // 상세 조회
+  .patch(
+    Middleware.validate(Params.UpdateGroupSchema),
+    Controller.updateGroupController,
+  ) // 그룹 업데이트
+  .delete(Controller.deleteGroupController); // 그룹 삭제
+
+groupRouter.get(
+  '/:groupId/rank',
+  Middleware.validateID,
+  Controller.getGroupMemRankController,
+); // 랭킹 조회

@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import { DeleteGroupResponse } from '../../models/group';
-import { verifyOwner } from '../../utils/auth.util';
+import { DeleteGroupResponse } from '../../models/group/delete_group.dto.js';
+import { verifyOwner } from '../../utils/auth.util.js';
 
 const prisma = new PrismaClient();
 

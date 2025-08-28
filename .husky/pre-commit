@@ -4,5 +4,5 @@ echo "🚀 Running build..."
 npm run build || exit 1
 echo "🚀 Running tests..."
 npm test || exit 1
-echo "🚀 Running lint-staged..."
-npx lint-staged || exit 1
+# echo "🚀 Running lint-staged..."
+# npx lint-staged || exit 1

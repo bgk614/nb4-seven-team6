@@ -10,4 +10,13 @@ export interface GroupResponse {
   ownerParticipantId?: number;
   createdAt: Date;
   updatedAt: Date;
+  tags: string[];
+  owner?: { id: number; nickname: string };
+  participants: {
+    id: number;
+    nickname: string;
+    createdAt: Date;
+    updatedAt: Date;
+  }[];
+  badges: string[];
 }
