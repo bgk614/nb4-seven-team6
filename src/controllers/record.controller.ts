@@ -1,11 +1,11 @@
 // src/controllers/record.controller.ts
-import { prisma } from '../config/db';
-import { verifyPassword } from '../utils/password';
+import { prisma } from '@/config/db';
+import { verifyPassword } from '@/utils/password';
 import {
   createRecord,
   validatePhotos,
   enforceTimer,
-} from '../services/record.service'; // ✅ validateExercise 제거
+} from '@/services/record.service'; // ✅ validateExercise 제거
 
 export const registerRecord = async (req: any, res: any, next: any) => {
   try {
@@ -112,7 +112,12 @@ export const getAllRecords = async (req: any, res: any, next: any) => {
 
     const skip = (page - 1) * limit;
     // 정렬 매개변수 검증 - 프론트엔드와 호환되도록 수정
-    const sortBy = req.query.sortBy || req.query.orderBy || 'createdAt';
+    let sortBy = req.query.sortBy || req.query.orderBy || 'createdAt';
+    // time -> seconds 매핑 추가
+    if (sortBy === 'time') {
+      sortBy = 'seconds';
+    }
+
     const validSortFields = ['createdAt', 'seconds', 'distanceKm', 'exercise'];
 
     if (!validSortFields.includes(sortBy)) {
@@ -123,6 +128,7 @@ export const getAllRecords = async (req: any, res: any, next: any) => {
         { status: 400 },
       );
     }
+
     // order 파라미터도 지원하도록 수정
     const sortOrder = req.query.sortOrder || req.query.order || 'desc';
 
@@ -265,7 +271,12 @@ export const getAllUserRecords = async (req: any, res: any, next: any) => {
 
     const skip = (page - 1) * limit;
 
-    const sortBy = req.query.sortBy || req.query.orderBy || 'createdAt';
+    let sortBy = req.query.sortBy || req.query.orderBy || 'createdAt';
+    // time -> seconds 매핑 추가
+    if (sortBy === 'time') {
+      sortBy = 'seconds';
+    }
+
     const validSortFields = ['createdAt', 'seconds', 'distanceKm', 'exercise'];
 
     if (!validSortFields.includes(sortBy)) {
