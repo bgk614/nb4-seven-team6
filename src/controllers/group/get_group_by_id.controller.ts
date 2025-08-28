@@ -10,7 +10,6 @@ export async function getGroupByIdController(req: Request, res: Response) {
     if (!group) {
       return res.status(404).json({ message: 'Group not found' });
     }
-
     return res.json(group);
   } catch (e: any) {
     return res.status(500).json({ message: e.message });

@@ -17,7 +17,6 @@ export async function getGroupsController(req: Request, res: Response) {
       orderBy,
       search,
     });
-
     res.json(result);
   } catch (e: any) {
     res.status(500).json({ message: e.message });

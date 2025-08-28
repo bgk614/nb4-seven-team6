@@ -18,6 +18,8 @@ export const registerRecord = async (
     const {
       nickname,
       password,
+      authorNickname,
+      authorPassword,
       exerciseType,
       description,
       time,
@@ -26,8 +28,18 @@ export const registerRecord = async (
       timerId,
     } = req.body ?? {};
 
+    // 프론트엔드 필드명 지원
+    const actualNickname = nickname || authorNickname;
+    const actualPassword = password || authorPassword;
+
     // 필수 필드 검증
-    if (!groupId || !nickname || !password || !exerciseType || time == null) {
+    if (
+      !groupId ||
+      !actualNickname ||
+      !actualPassword ||
+      !exerciseType ||
+      time == null
+    ) {
       throw Object.assign(new Error('Missing required fields'), {
         status: 400,
       });
@@ -35,13 +47,18 @@ export const registerRecord = async (
 
     // 그룹 내 닉네임/비번 검증
     const participant = await prisma.participant.findFirst({
-      where: { groupId, nickname },
+      where: { groupId, nickname: actualNickname },
     });
     if (!participant) {
-      throw Object.assign(new Error('Invalid credentials'), { status: 401 });
+      throw Object.assign(new Error('그룹에 가입되어있지않는 유저입니다.'), {
+        status: 401,
+      });
     }
 
-    const ok = await verifyPassword(String(password), participant.password);
+    const ok = await verifyPassword(
+      String(actualPassword),
+      participant.password,
+    );
     if (!ok) {
       throw Object.assign(new Error('Invalid credentials'), { status: 401 });
     }
@@ -104,82 +121,6 @@ export const registerRecord = async (
     };
 
     res.status(201).json(response);
-  } catch (e) {
-    next(e);
-  }
-};
-
-// 기록 조회 API
-export const getRecords = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
-  try {
-    const groupId = Number(req.params.groupId);
-    const {
-      page = 1,
-      limit = 6,
-      order = 'desc',
-      orderBy = 'createdAt',
-      search = '',
-    } = req.query;
-
-    const skip = (Number(page) - 1) * Number(limit);
-    const take = Number(limit);
-
-    // 검색 조건
-    const where = { groupId } as Record<string, unknown>;
-    if (search) {
-      where.OR = [
-        { description: { contains: search, mode: 'insensitive' } },
-        {
-          participant: {
-            nickname: { contains: search, mode: 'insensitive' },
-          },
-        },
-      ];
-    }
-
-    // 정렬 조건
-    const orderByClause = {} as Record<string, string>;
-    if (orderBy === 'createdAt') {
-      orderByClause.createdAt = order as string;
-    } else if (orderBy === 'time') {
-      orderByClause.seconds = order as string;
-    }
-
-    const [records, total] = await Promise.all([
-      prisma.record.findMany({
-        where,
-        include: {
-          participant: { select: { id: true, nickname: true } },
-          photos: { select: { url: true } },
-        },
-        orderBy: orderByClause,
-        skip,
-        take,
-      }),
-      prisma.record.count({ where }),
-    ]);
-
-    // 프론트엔드 형태로 변환
-    const data = records.map((record) => ({
-      id: record.id,
-      exerciseType: record.exercise,
-      description: record.description,
-      time: record.seconds,
-      distance: record.distanceKm,
-      photos: record.photos.map((p) => p.url),
-      author: {
-        id: record.participant.id,
-        nickname: record.participant.nickname,
-      },
-      createdAt: record.createdAt.getTime(),
-      updatedAt: record.updatedAt.getTime(),
-    }));
-
-    res.json({ data, total });
   } catch (e) {
     next(e);
   }
@@ -259,20 +200,25 @@ export const getAllRecords = async (req: any, res: any, next: any) => {
         }),
       ]);
 
-      // 응답 포맷팅
+      // 응답 포맷팅 (프론트엔드 API 타입에 맞춤)
       const formattedRecords = records.map((record) => ({
-        ...record,
+        id: record.id,
+        exerciseType: record.exercise,
+        description: record.description,
+        time: record.seconds,
+        distance: record.distanceKm,
         photos: record.photos.map((photo) => photo.url),
+        author: {
+          id: record.participant.id,
+          nickname: record.participant.nickname,
+        },
+        createdAt: record.createdAt.getTime(),
+        updatedAt: record.updatedAt.getTime(),
       }));
 
       res.status(200).json({
-        records: formattedRecords,
-        pagination: {
-          total,
-          page,
-          limit,
-          totalPages: Math.ceil(total / limit),
-        },
+        data: formattedRecords,
+        total,
       });
     } catch (dbError) {
       console.error('Database error:', dbError);
