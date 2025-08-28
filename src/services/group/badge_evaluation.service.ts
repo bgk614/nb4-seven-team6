@@ -1,6 +1,6 @@
 // 배지 평가 및 부여 서비스
 import { Prisma } from '@prisma/client';
-import { BadgeType } from '../../generated/prisma/index.js';
+import { BadgeType } from '@prisma/client';
 
 // 그룹의 현재 상태를 확인하여 조건 달성 시 배지 부여
 export async function evaluateAndAwardBadges(
