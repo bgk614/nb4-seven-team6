@@ -2,7 +2,8 @@ import { Router, Request, Response } from 'express';
 import multer, { StorageEngine } from 'multer';
 import path from 'path';
 import fs from 'fs';
-
+import dotenv from 'dotenv';
+dotenv.config();
 export const uploadRouter = Router();
 
 const UPLOADS_FOLDER = path.join(process.cwd(), 'uploads');
@@ -23,7 +24,9 @@ const storage: StorageEngine = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// 파일 업로드 API - 단일 및 복수 파일 모두 처리
+// base URL (환경변수로 주입, 기본값은 로컬 테스트용)
+const BASE_URL = process.env.UPLOAD_BASE_URL || 'http://localhost:6123';
+
 uploadRouter.post(
   '/',
   upload.array('files', 3), // 최대 3개 파일 (단일 파일도 처리 가능)
@@ -32,14 +35,12 @@ uploadRouter.post(
     const singleFile = req.file as Express.Multer.File;
     // 복수 파일 처리
     if (files && files.length > 0) {
-      const urls = files.map((file) => {
-        return `${req.protocol}://${req.get('host')}/uploads/${file.filename}`;
-      });
+      const urls = files.map((file) => `${BASE_URL}/uploads/${file.filename}`);
       return res.json({ urls });
     }
     // 단일 파일 처리 (기존 API 호환성)
     if (singleFile) {
-      const fileUrl = `${req.protocol}://${req.get('host')}/uploads/${singleFile.filename}`;
+      const fileUrl = `${BASE_URL}/uploads/${singleFile.filename}`;
       return res.json({ url: fileUrl, urls: [fileUrl] });
     }
 
