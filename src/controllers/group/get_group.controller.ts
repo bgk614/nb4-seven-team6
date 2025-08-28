@@ -21,8 +21,8 @@ export async function getGroupsController(req: Request, res: Response) {
       ...result,
       data: result.data.map((group) => ({
         ...group,
-        tags: group.tags.map((tag) => tag.name),
-        badges: group.badges.map((badge) => badge.type),
+        tags: group.tags,
+        badges: group.badges,
       })),
     };
     res.json(transformedData);
