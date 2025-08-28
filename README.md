@@ -141,10 +141,8 @@
 │   ├── config
 │   │   └── db.ts
 │   ├── controllers
-│   │   ├── auth.controller.ts
 │   │   ├── group
-│   │   ├── record.controller.ts
-│   │   └── user.controller.ts
+│   │   └── record.controller.ts
 │   ├── generated
 │   ├── index.ts
 │   ├── middleware
@@ -153,13 +151,10 @@
 │   │   └── validate.middleware.ts
 │   ├── models
 │   │   ├── auth
-│   │   ├── course.model.ts
 │   │   ├── error_response.model.ts
 │   │   ├── group
-│   │   ├── upload
-│   │   └── user.model.ts
+│   │   └── upload
 │   ├── routes
-│   │   ├── auth.routes.ts
 │   │   ├── group.routes.ts
 │   │   ├── record.routes.ts
 │   │   ├── timer.routes.ts
@@ -167,10 +162,8 @@
 │   │   ├── uploads
 │   │   └── user.routes.ts
 │   ├── services
-│   │   ├── auth.service.ts
 │   │   ├── group
-│   │   ├── record.service.ts
-│   │   └── user.service.ts
+│   │   └── record.service.ts
 │   ├── swagger
 │   │   ├── components
 │   │   ├── info
