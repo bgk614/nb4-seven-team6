@@ -9,6 +9,7 @@ export async function getGroupsController(req: Request, res: Response) {
     const order = (req.query.order as string) || 'desc';
     const orderBy = (req.query.orderBy as string) || 'createdAt';
     const search = (req.query.search as string) || undefined;
+
     const result = await getGroupsService({
       page,
       limit,
@@ -16,16 +17,7 @@ export async function getGroupsController(req: Request, res: Response) {
       orderBy,
       search,
     });
-    // 프론트엔드가 기대하는 형태로 변환
-    const transformedData = {
-      ...result,
-      data: result.data.map((group) => ({
-        ...group,
-        tags: group.tags,
-        badges: group.badges,
-      })),
-    };
-    res.json(transformedData);
+    res.json(result);
   } catch (e: any) {
     res.status(500).json({ message: e.message });
   }
