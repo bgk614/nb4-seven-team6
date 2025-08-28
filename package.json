@@ -6,6 +6,9 @@
   "author": "",
   "type": "module",
   "main": "index.js",
+  "prisma": {
+    "seed": "ts-node prisma/seed.js"
+  },
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc && tsc-alias",
@@ -14,7 +17,8 @@
     "test:run": "vitest run --config vitest.config.ts",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "seed": "prisma db seed"
   },
   "dependencies": {
     "@apidevtools/swagger-parser": "^12.0.0",
