@@ -111,9 +111,8 @@ export const getAllRecords = async (req: any, res: any, next: any) => {
     }
 
     const skip = (page - 1) * limit;
-
-    // 정렬 매개변수 검증
-    const sortBy = req.query.sortBy || 'createdAt';
+    // 정렬 매개변수 검증 - 프론트엔드와 호환되도록 수정
+    const sortBy = req.query.sortBy || req.query.orderBy || 'createdAt';
     const validSortFields = ['createdAt', 'seconds', 'distanceKm', 'exercise'];
 
     if (!validSortFields.includes(sortBy)) {
@@ -124,8 +123,8 @@ export const getAllRecords = async (req: any, res: any, next: any) => {
         { status: 400 },
       );
     }
-    const sortOrder =
-      req.query.sortOrder?.toLowerCase() === 'asc' ? 'asc' : 'desc';
+    // order 파라미터도 지원하도록 수정
+    const sortOrder = req.query.sortOrder || req.query.order || 'desc';
 
     // 그룹 존재 확인
     const group = await prisma.group.findUnique({
@@ -165,13 +164,8 @@ export const getAllRecords = async (req: any, res: any, next: any) => {
       }));
 
       res.status(200).json({
-        records: formattedRecords,
-        pagination: {
-          total,
-          page,
-          limit,
-          totalPages: Math.ceil(total / limit),
-        },
+        data: formattedRecords,
+        total,
       });
     } catch (dbError) {
       console.error('Database error:', dbError);
@@ -253,7 +247,6 @@ export const getRecordById = async (req: any, res: any, next: any) => {
 // 전체 운동 기록 조회 (그룹 제한 없음)
 export const getAllUserRecords = async (req: any, res: any, next: any) => {
   try {
-    // 페이지네이션 매개변수 검증
     const page = Number(req.query.page) || 1;
     const limit = Number(req.query.limit) || 10;
     const nickname = req.query.nickname;
@@ -272,8 +265,7 @@ export const getAllUserRecords = async (req: any, res: any, next: any) => {
 
     const skip = (page - 1) * limit;
 
-    // 정렬 매개변수 검증
-    const sortBy = req.query.sortBy || 'createdAt';
+    const sortBy = req.query.sortBy || req.query.orderBy || 'createdAt';
     const validSortFields = ['createdAt', 'seconds', 'distanceKm', 'exercise'];
 
     if (!validSortFields.includes(sortBy)) {
@@ -284,13 +276,10 @@ export const getAllUserRecords = async (req: any, res: any, next: any) => {
         { status: 400 },
       );
     }
-    const sortOrder =
-      req.query.sortOrder?.toLowerCase() === 'asc' ? 'asc' : 'desc';
 
-    // 필터링 조건 구성
+    const sortOrder = req.query.sortOrder || req.query.order || 'desc';
+
     const where: any = {};
-
-    // 닉네임 검색 조건 추가
     if (nickname) {
       where.participant = {
         nickname: {
@@ -299,7 +288,6 @@ export const getAllUserRecords = async (req: any, res: any, next: any) => {
       };
     }
 
-    // 페이지네이션 및 정렬 적용
     try {
       const [records, total] = await Promise.all([
         prisma.record.findMany({
@@ -322,20 +310,14 @@ export const getAllUserRecords = async (req: any, res: any, next: any) => {
         prisma.record.count({ where }),
       ]);
 
-      // 응답 포맷팅
       const formattedRecords = records.map((record) => ({
         ...record,
         photos: record.photos.map((photo) => photo.url),
       }));
 
       res.status(200).json({
-        records: formattedRecords,
-        pagination: {
-          total,
-          page,
-          limit,
-          totalPages: Math.ceil(total / limit),
-        },
+        data: formattedRecords,
+        total,
       });
     } catch (dbError) {
       console.error('Database error:', dbError);
