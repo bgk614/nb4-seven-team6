@@ -57,9 +57,9 @@ async function main() {
   const allUsers = [owner, ...participants];
   const today = new Date();
 
-  // 각 사용자별 10개 기록 = 총 90개 이상
+  // 각 사용자별 11개 기록 = 총 99개 이상
   for (const [index, user] of allUsers.entries()) {
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 11; i++) {
       await prisma.record.create({
         data: {
           groupId: group.id,
