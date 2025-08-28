@@ -20,31 +20,21 @@ jobs:
 
       - name: Install dependencies & build
         run: |
-          npm ci
+          npm install
           npm run build
 
-      - name: Check build output
-        run: ls -R dist || echo "dist not found"
-
-      - name: Copy build files to EC2
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          source: |
-            dist/**
-            package.json
-            package-lock.json
-          target: '/home/ubuntu/codeit-team-project-1/nb4-seven-team6'
-
-      - name: Restart app on EC2
+      - name: Deploy to EC2
         uses: appleboy/ssh-action@v1.2.2
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
+          command_timeout: 10m
           script: |
             cd /home/ubuntu/codeit-team-project-1/nb4-seven-team6
-            npm ci --omit=dev
+            git fetch --all --tags
+            git reset --hard
+            git checkout ${{ github.ref_name }}
+            npm ci
+            npm run build
             pm2 restart codeit-team-project-1 || pm2 start dist/index.js --name codeit-team-project-1
