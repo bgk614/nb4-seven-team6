@@ -28,7 +28,6 @@ app.use('/groups', groupRouter);
 app.get('/health', (_req, res) => res.send('ok'));
 app.use('/api/timer', timerRoutes);
 app.use('', recordRoutes);
-app.get('/health', (_req, res) => res.send('ok'));
 
 app.use(errorMiddleware);
 
