@@ -1,8 +1,8 @@
 // prisma/mockData.js
 import { PrismaClient, ExerciseType } from '@prisma/client';
-
+import bcrypt from 'bcryptjs';
 const prisma = new PrismaClient();
-
+const hashedPassword = await bcrypt.hash('owner123', 10);
 async function main() {
   // === 1. 그룹 생성 ===
   let group = await prisma.group.upsert({
@@ -13,7 +13,8 @@ async function main() {
       name: '그룹 배지 테스트',
       description: '배지 테스트용 그룹',
       goalRep: 100,
-      discordWebhookUrl: 'https://test',
+      discordWebhookUrl:
+        'https://discord.com/api/webhooks/1410447199543758980/_Tw8LLYUBY-25WcZ3g3Mll1nmkJsqnQ0TlCwx2hemQkDLVoaZMVwak1aD3vXXtg-8yny',
       discordInviteUrl: 'https://test',
       likeCount: 99,
     },
@@ -26,7 +27,7 @@ async function main() {
     create: {
       groupId: group.id,
       nickname: 'owner',
-      password: 'owner123',
+      password: hashedPassword, // 해싱된 패스워드 저장
     },
   });
 
@@ -57,9 +58,9 @@ async function main() {
   const allUsers = [owner, ...participants];
   const today = new Date();
 
-  // 각 사용자별 10개 기록 = 총 90개 이상
+  // 각 사용자별 11개 기록 = 총 99개 이상
   for (const [index, user] of allUsers.entries()) {
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 11; i++) {
       await prisma.record.create({
         data: {
           groupId: group.id,
