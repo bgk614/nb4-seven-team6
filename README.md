@@ -1,24 +1,52 @@
-# nb4-seven-team6
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9.2-3178C6?logo=typescript&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-22.17.0-339933?logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express-5.1.0-000000?logo=express&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-6.14.0-2D3748?logo=prisma&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17.5-4169E1?logo=postgresql&logoColor=white)
 
-## [:link: 노션](https://www.notion.so/24cb1b4efe4d80dc818cf37149e2f65b)
+# 운동인증 커뮤니티 서비스 백엔드
 
-## 로컬 [swagger](http://localhost:6123/api-docs/)
+## 목차
 
-## 팀원 구성
-
-이상욱 [Github :link:](https://github.com/NewL1f3)<br>
-김보경 [Github :link:](https://github.com/bgk614)<br>
-엄규리 [Github :link:](https://github.com/ammgree)<br>
-박형익 [Github :link:](https://github.com/Sw-twt)<br>
-김태회 [Github :link:](https://github.com/F-los)<br>
+- [프로젝트 소개](#프로젝트-소개)
+- [구현한 웹페이지](#구현한-웹페이지)
+- [주요 문서](#주요-문서--자료)
+- [팀원](#팀원)
+- [기술 스택](#기술-스택)
+- [구현 기능](#팀원별-구현-기능-상세)
+- [파일 구조](#파일-구조)
 
 ## 프로젝트 소개
 
-운동 인증 커뮤니티 서비스의 백엔드 시스템 구축<br>
-프로젝트 기간: 2025.08.11 ~ 2025.08.29<br>
+- 운동 인증 커뮤니티 서비스의 백엔드 시스템 구축<br>
+- 그룹, 참여자, 운동 기록, 배지, 좋아요 기능<br>
+- 프로젝트 기간: 2025.08.11 ~ 2025.08.29<br>
+
+## 구현한 웹페이지
+
+- 사이트 주소: https://nb4-seven-team6-front.vercel.app/
+
+## 주요 문서 & 자료
+
+| 문서                 | 링크 |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Swagger API          | [바로가기](https://codeit.teamproject1.server.bgk.dev/api-docs/) |
+| 팀 문서 (Notion)     | [바로가기](https://radial-attention-ca6.notion.site/24cb1b4efe4d80dc818cf37149e2f65b) |
+| 실행 영상            | [바로가기](https://docs.google.com/file/d/1YaSgmVFjx7ccKw2Noi5LhFdTZup_FRHF/preview) |
+| 최종 발표 PPT        | [바로가기](https://file.notion.so/f/f/a29b669d-e680-438e-b18c-08888fc54a21/812c8ea0-db07-4181-9326-05c1231c884c/부캠팀플1최종발표템플릿.pdf?table=block&id=25a6fd22-8e8d-8097-82a8-ce9129223a8e&spaceId=a29b669d-e680-438e-b18c-08888fc54a21&expirationTimestamp=1756468800000&signature=8QhMrpv9UfzmNk_WCK12Jzgej0S8X7tv4pUhjKEWUwY&downloadName=6팀_SEVEN_발표자료.pdf) |
+| 프론트엔드 레포지토리 | [바로가기](https://github.com/NewL1f3/nb4-seven-team6-front) |
+
+## 팀원
+
+| [이상욱](https://github.com/NewL1f3)                                 | [김보경](https://github.com/bgk614)                                 | [엄규리](https://github.com/ammgree)                                 | [박형익](https://github.com/Sw-twt)                                 | [김태회](https://github.com/F-los)                                 |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| <img src="https://avatars.githubusercontent.com/NewL1f3" width="80"> | <img src="https://avatars.githubusercontent.com/bgk614" width="80"> | <img src="https://avatars.githubusercontent.com/ammgree" width="80"> | <img src="https://avatars.githubusercontent.com/Sw-twt" width="80"> | <img src="https://avatars.githubusercontent.com/F-los" width="80"> |
 
 ## 기술 스택
 
+<details>
+<summary>📂 기술 스택 보기</summary>
+<br>
 <table>
   <tr>
     <th>Category</th>
@@ -106,6 +134,7 @@
     <td align="right">10.x</td>
   </tr>
 </table>
+</details>
 
 ## 팀원별 구현 기능 상세
 
@@ -142,60 +171,100 @@
 │   │   └── db.ts
 │   ├── controllers
 │   │   ├── group
+│   │   │   ├── create_group.controller.ts
+│   │   │   ├── delete_group.controller.ts
+│   │   │   ├── get_group_by_id.controller.ts
+│   │   │   ├── get_group_mem_rank.controller.ts
+│   │   │   ├── get_group.controller.ts
+│   │   │   ├── index.ts
+│   │   │   ├── join_group.controller.ts
+│   │   │   ├── leave_group.controller.ts
+│   │   │   ├── recommend_group.controller.ts
+│   │   │   └── update_group.controller.ts
 │   │   └── record.controller.ts
 │   ├── generated
 │   ├── index.ts
 │   ├── middleware
 │   │   ├── auth.middleware.ts
 │   │   ├── error.middleware.ts
+│   │   ├── group.middleware.ts
+│   │   ├── index.ts
 │   │   └── validate.middleware.ts
 │   ├── models
 │   │   ├── auth
+│   │   │   ├── auth_request.model.ts
+│   │   │   ├── auth_response.model.ts
+│   │   │   └── index.ts
 │   │   ├── error_response.model.ts
 │   │   ├── group
+│   │   │   ├── create_group.dto.ts
+│   │   │   ├── delete_group.dto.ts
+│   │   │   ├── group_response.dto.ts
+│   │   │   ├── index.ts
+│   │   │   └── update_group.dto.ts
 │   │   └── upload
+│   │       ├── upload_request.model.ts
+│   │       └── upload_response.model.ts
 │   ├── routes
 │   │   ├── group.routes.ts
 │   │   ├── record.routes.ts
 │   │   ├── timer.routes.ts
 │   │   ├── upload.route.ts
-│   │   ├── uploads
-│   │   └── user.routes.ts
+│   │   └── uploads
 │   ├── services
 │   │   ├── group
+│   │   │   ├── badge_evaluation.service.ts
+│   │   │   ├── create_group.service.ts
+│   │   │   ├── delete_group.service.ts
+│   │   │   ├── get_group_by_id.service.ts
+│   │   │   ├── get_group_mem_rank.service.ts
+│   │   │   ├── get_group.service.ts
+│   │   │   ├── index.ts
+│   │   │   ├── join_group.service.ts
+│   │   │   ├── leave_group.service.ts
+│   │   │   ├── recommend_group.service.ts
+│   │   │   └── update_group.service.ts
 │   │   └── record.service.ts
 │   ├── swagger
 │   │   ├── components
+│   │   │   ├── examples
+│   │   │   ├── index.yaml
+│   │   │   ├── parameters
+│   │   │   ├── responses
+│   │   │   └── schemas
 │   │   ├── info
+│   │   │   └── index.yaml
 │   │   ├── paths
+│   │   │   ├── group
+│   │   │   ├── index.yaml
+│   │   │   ├── record
+│   │   │   ├── timer
+│   │   │   └── upload
 │   │   ├── server
+│   │   │   └── index.yaml
 │   │   ├── swagger.yaml
 │   │   └── tags
+│   │       └── index.yaml
 │   ├── tests
-│   │   ├── record.e2e.test.ts
-│   │   └── record.more.e2e.test.ts
+│   │   ├── api.test.ts
+│   │   └── setup.ts
 │   └── utils
 │       ├── auth.util.ts
 │       ├── discord.ts
 │       ├── mappers
+│       │   └── group.mapper.ts
 │       ├── password.ts
 │       └── timer.ts
-├── eslint.config.js
+├── test_webhook.js
+├── test.txt
 ├── tsconfig.json
-├── vitest.config.ts
+├── uploads
+├── eslint.config.js
 ├── package-lock.json
 ├── package.json
+├── README.md
 ├── seed.js
-├── uploads
-└── README.md
+└── vitest.config.ts
 ```
 
 </details>
-
-## 구현 홈페이지
-
-(개발한 홈페이지에 대한 링크 게시)
-
-## 프로젝트 회고록
-
-(제작한 발표자료 링크 혹은 첨부파일 첨부)
