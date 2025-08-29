@@ -140,7 +140,15 @@
 
 ### 이상욱 <sub>운동기록(조회/정렬/검색)</sub>
 
-(자신이 개발한 기능에 대한 사진이나 gif 파일 첨부)
+<details>
+<summary> 구현 내용 </summary>
+<img width="1079" height="910" alt="1" src="https://github.com/user-attachments/assets/9b540d28-5aa7-4cf0-a4a1-5d366ec45eac" />
+<img width="1096" height="805" alt="2" src="https://github.com/user-attachments/assets/3aabca3a-c0fc-451e-b5ab-ae6784da8d3d" />
+<img width="1069" height="805" alt="3" src="https://github.com/user-attachments/assets/ee451050-53e7-4eea-8b19-2e9e2854d692" />
+<img width="1096" height="781" alt="4" src="https://github.com/user-attachments/assets/7dd16df1-a5fc-4dce-b09d-1848561324f4" />
+<img width="1127" height="796" alt="5" src="https://github.com/user-attachments/assets/531e6b40-ff70-4eb6-8eb3-c65e85608c48" />
+<img width="1088" height="774" alt="6" src="https://github.com/user-attachments/assets/edf1bda5-239c-4810-b2df-b552044723c5" />
+</details>
 
 ### 김보경 <sub>그룹 DB, 그룹(생성/수정/삭제)</sub>
 
