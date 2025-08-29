@@ -151,8 +151,73 @@
 </details>
 
 ### 김보경 <sub>그룹 DB, 그룹(생성/수정/삭제)</sub>
+<details>
+<summary>
+  📁 자세히 보기
+</summary>
+  <table>
+ <tr>
+  <td>
+   <mark>그룹</mark><br>등록<br>수정<br>삭제<br><mark>이미지 업로드</mark><br>참여자 인증
+  </td>
+  <td>
+   <img src="https://github.com/user-attachments/assets/abbd95b7-60ff-48cf-a529-c4aef2d53775" width="300"/>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <mark>Husky</mark> 이용<br>Prettier<br>Lint<br>Build 자동화<br>Lint 규칙 설정
+  </td>
+  <td>
+   <img src="https://github.com/user-attachments/assets/85c924b5-6c41-418d-bbc7-b01f8d6f2e05" width="300"/>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <mark>GitHub Actions CD</mark> 이용<br>백엔드 배포 자동화<br><br>+<br> AWS EC2 / RDS<br>Vercel(프론트)
+  </td>
+  <td>
+   <img src="https://github.com/user-attachments/assets/208f52e5-524e-4bd8-8395-0c2fea7496d0" width="300"/>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   그룹 & 이미지<br><mark>Swagger</mark>문서 작성<br>및 파일 분리
+  </td>
+  <td>
+   <img src="https://github.com/user-attachments/assets/b9739d20-cbdc-4b2f-8046-feb749733fd3" width="300"/>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <mark>gotty</mark>이용<br>서버 로그 실시간<br>웹뷰어 설정
+  </td>
+  <td>
+   <img src="https://github.com/user-attachments/assets/fb31588f-63d9-4dd0-bed8-69ef0227378a" width="300"/>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <mark>ERD</mark>
+  </td>
+  <td>
+   <img src="https://github.com/user-attachments/assets/6f454c37-9185-4f23-b975-582ace41f0a9" width="300"/>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <mark>Deployment Diagram</mark>
+  </td>
+  <td>
+   <img src="https://github.com/user-attachments/assets/9742f3fc-6090-41a8-b282-614ca4d72cc8" width="300"/>
+  </td>
+ </tr>
+</table>
 
-(자신이 개발한 기능에 대한 사진이나 gif 파일 첨부)
+- 참여자의 그룹 탈퇴 상황 케이스 처리
+- 그룹 응답 데이터 프론트와 일치시키는 매핑 개발
+- 배지 테스트를 위한 목업 데이터 만들기
+</details>
 
 ### 엄규리 <sub>그룹(조회/정렬/검색)</sub>
 
