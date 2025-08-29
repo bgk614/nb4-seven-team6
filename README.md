@@ -164,8 +164,22 @@
 (자신이 개발한 기능에 대한 사진이나 gif 파일 첨부)
 
 ### 김태회 <sub>기록 DB, 운동기록(생성/수정/삭제)</sub>
+<details>
+  <summary> 개발 내용 </summary>
+  - vitest를 통한 전체적인 기능점검
+  <img width="1012" height="766" alt="image" src="https://github.com/user-attachments/assets/844cb69b-1d2f-4ff7-a5e6-71187adf0320" />
+  <img width="849" height="512" alt="image" src="https://github.com/user-attachments/assets/06ae5bcf-5310-47b7-980a-cf36b14c3ec1" />
 
-(자신이 개발한 기능에 대한 사진이나 gif 파일 첨부)
+  - 백앤드의 설정한 fields 값이 아닐경우 request를 reject한후 무슨 값이 필요한지 알려주는 기능
+  <img width="1265" height="922" alt="image" src="https://github.com/user-attachments/assets/8eff89b6-ad3b-4180-aff6-184f9843cfaa" />
+
+  - 직접 타이머 api를 구축해 실제로 UI 시작 종료를 누르는시간을 서버타임으로 계산후 검증기능 구축
+  <img width="741" height="915" alt="image" src="https://github.com/user-attachments/assets/68a59c54-1421-4b1f-8ca6-b13f405e861d" />
+
+  - 운동기록/사진 검증 및 등록 기능 구축
+
+</details>
+
 
 ## 파일 구조
 
