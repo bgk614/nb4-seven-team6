@@ -28,13 +28,13 @@
 
 ## 주요 문서 & 자료
 
-| 문서                  | 링크                                                                                                                                         |
-| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| Swagger API           | [바로가기](https://codeit.teamproject1.server.bgk.dev/api-docs/)                                                                             |
-| 팀 문서 (Notion)      | [바로가기](https://radial-attention-ca6.notion.site/24cb1b4efe4d80dc818cf37149e2f65b)                                                        |
-| 실행 영상             | [바로가기](https://drive.google.com/file/d/1YaSgmVFjx7ccKw2Noi5LhFdTZup_FRHF/view)                                                           |
-| 최종 발표 PPT         | [바로가기](https://file.notion.so/f/f/a29b669d-e680-438e-b18c-08888fc54a21/812c8ea0-db07-4181-9326-05c1231c884c/부캠팀플1최종발표템플릿.pdf) |
-| 프론트엔드 레포지토리 | [바로가기](https://github.com/NewL1f3/nb4-seven-team6-front)                                                                                 |
+| 문서                 | 링크 |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Swagger API          | [바로가기](https://codeit.teamproject1.server.bgk.dev/api-docs/) |
+| 팀 문서 (Notion)     | [바로가기](https://radial-attention-ca6.notion.site/24cb1b4efe4d80dc818cf37149e2f65b) |
+| 실행 영상            | [바로가기](https://docs.google.com/file/d/1YaSgmVFjx7ccKw2Noi5LhFdTZup_FRHF/preview) |
+| 최종 발표 PPT        | [바로가기](https://file.notion.so/f/f/a29b669d-e680-438e-b18c-08888fc54a21/812c8ea0-db07-4181-9326-05c1231c884c/부캠팀플1최종발표템플릿.pdf?table=block&id=25a6fd22-8e8d-8097-82a8-ce9129223a8e&spaceId=a29b669d-e680-438e-b18c-08888fc54a21&expirationTimestamp=1756468800000&signature=8QhMrpv9UfzmNk_WCK12Jzgej0S8X7tv4pUhjKEWUwY&downloadName=6팀_SEVEN_발표자료.pdf) |
+| 프론트엔드 레포지토리 | [바로가기](https://github.com/NewL1f3/nb4-seven-team6-front) |
 
 ## 팀원
 
