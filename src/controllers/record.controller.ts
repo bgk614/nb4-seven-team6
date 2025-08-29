@@ -185,11 +185,24 @@ export const getAllRecords = async (req: any, res: any, next: any) => {
       throw Object.assign(new Error('Group not found'), { status: 404 });
     }
 
+    // 검색 파라미터 처리
+    const search = req.query.search || '';
+    const where: any = { groupId };
+
+    // 검색어가 있는 경우 닉네임 검색 조건 추가
+    if (search) {
+      where.participant = {
+        nickname: {
+          contains: search,
+        },
+      };
+    }
+
     // 페이지네이션 및 정렬 적용
     try {
       const [records, total] = await Promise.all([
         prisma.record.findMany({
-          where: { groupId },
+          where,
           include: {
             participant: {
               select: { id: true, nickname: true },
@@ -203,7 +216,7 @@ export const getAllRecords = async (req: any, res: any, next: any) => {
           take: limit,
         }),
         prisma.record.count({
-          where: { groupId },
+          where,
         }),
       ]);
 
