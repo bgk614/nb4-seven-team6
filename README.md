@@ -156,7 +156,8 @@
 
 ### 엄규리 <sub>그룹(조회/정렬/검색)</sub>
 
-(자신이 개발한 기능에 대한 사진이나 gif 파일 첨부)
+![ezgif-79107d9dacac90](https://github.com/user-attachments/assets/c4c2e055-efbb-40d2-a64d-397949c1445d)
+
 
 ### 박형익 <sub>그룹(배지/참여/추천)</sub>
 
