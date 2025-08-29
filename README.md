@@ -225,8 +225,13 @@
 
 
 ### 박형익 <sub>그룹(배지/참여/추천)</sub>
-
-(자신이 개발한 기능에 대한 사진이나 gif 파일 첨부)
+-뱃지 표시
+<img width="1248" height="639" alt="Image" src="https://github.com/user-attachments/assets/b2a69ce8-4d62-4c0d-93e4-342e731e1600" />
+-추천 참여 api
+<img width="1917" height="913" alt="Image" src="https://github.com/user-attachments/assets/1490e234-5c28-4691-a0fb-c5ab48bb5eac" />
+<img width="1913" height="156" alt="Image" src="https://github.com/user-attachments/assets/40517e65-d192-4162-8b3e-56db76a94c4d" />
+-orm최적화
+<img width="1656" height="954" alt="Image" src="https://github.com/user-attachments/assets/5b44fe07-ddc9-41be-b0b8-a62213448c5a" />
 
 ### 김태회 <sub>기록 DB, 운동기록(생성/수정/삭제)</sub>
 <details>
@@ -247,6 +252,7 @@
 
 
 ## 파일 구조
+
 
 <details>
 <summary>📂 파일 구조 보기</summary>
