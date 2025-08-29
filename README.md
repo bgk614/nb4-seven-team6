@@ -153,7 +153,7 @@
    <mark>그룹</mark><br>등록<br>수정<br>삭제<br><mark>이미지 업로드</mark><br>참여자 인증
   </td>
   <td>
-   <img src="https://github.com/user-attachments/assets/fe10e565-131d-47b1-a645-2e1624a571d1" width="300"/>
+   <img src="https://github.com/user-attachments/assets/abbd95b7-60ff-48cf-a529-c4aef2d53775" width="300"/>
   </td>
  </tr>
  <tr>
