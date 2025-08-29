@@ -1,18 +1,20 @@
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9.2-3178C6?logo=typescript&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-22.17.0-339933?logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express-5.1.0-000000?logo=express&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-6.14.0-2D3748?logo=prisma&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17.5-4169E1?logo=postgresql&logoColor=white)
+
 # 운동인증 커뮤니티 서비스 백엔드
 
-### 구현한 웹페이지: https://nb4-seven-team6-front.vercel.app/<br>
+## 목차
 
-| [Swagger](https://codeit.teamproject1.server.bgk.dev/api-docs/) | [팀 문서 노션](https://radial-attention-ca6.notion.site/24cb1b4efe4d80dc818cf37149e2f65b) | [실행 영상](https://drive.google.com/file/d/1YaSgmVFjx7ccKw2Noi5LhFdTZup_FRHF/view) | [최종 발표 PPT](https://file.notion.so/f/f/a29b669d-e680-438e-b18c-08888fc54a21/812c8ea0-db07-4181-9326-05c1231c884c/부캠팀플1최종발표템플릿.pdf?table=block&id=25a6fd22-8e8d-8097-82a8-ce9129223a8e&spaceId=a29b669d-e680-438e-b18c-08888fc54a21&expirationTimestamp=1756461600000&signature=WtZscpn8qoXHu2BCXs7SVPRQuXjUwF9ZrTCKm85zUiQ&downloadName=6팀_SEVEN_발표자료.pdf) | [프론트 레포지토리](https://github.com/NewL1f3/nb4-seven-team6-front) |
-
-## 팀원 구성
-
-| 이름   | GitHub                                |
-| ------ | ------------------------------------- |
-| 이상욱 | [NewL1f3](https://github.com/NewL1f3) |
-| 김보경 | [bgk614](https://github.com/bgk614)   |
-| 엄규리 | [ammgree](https://github.com/ammgree) |
-| 박형익 | [Sw-twt](https://github.com/Sw-twt)   |
-| 김태회 | [F-los](https://github.com/F-los)     |
+- [프로젝트 소개](#프로젝트-소개)
+- [구현한 웹페이지](#구현한-웹페이지)
+- [주요 문서](#주요-문서--자료)
+- [팀원](#팀원)
+- [기술 스택](#기술-스택)
+- [구현 기능](#팀원별-구현-기능-상세)
+- [파일 구조](#파일-구조)
 
 ## 프로젝트 소개
 
@@ -20,8 +22,31 @@
 - 그룹, 참여자, 운동 기록, 배지, 좋아요 기능<br>
 - 프로젝트 기간: 2025.08.11 ~ 2025.08.29<br>
 
+## 구현한 웹페이지
+
+- 사이트 주소: https://nb4-seven-team6-front.vercel.app/
+
+## 주요 문서 & 자료
+
+| 문서                  | 링크                                                                                                                                         |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Swagger API           | [바로가기](https://codeit.teamproject1.server.bgk.dev/api-docs/)                                                                             |
+| 팀 문서 (Notion)      | [바로가기](https://radial-attention-ca6.notion.site/24cb1b4efe4d80dc818cf37149e2f65b)                                                        |
+| 실행 영상             | [바로가기](https://drive.google.com/file/d/1YaSgmVFjx7ccKw2Noi5LhFdTZup_FRHF/view)                                                           |
+| 최종 발표 PPT         | [바로가기](https://file.notion.so/f/f/a29b669d-e680-438e-b18c-08888fc54a21/812c8ea0-db07-4181-9326-05c1231c884c/부캠팀플1최종발표템플릿.pdf) |
+| 프론트엔드 레포지토리 | [바로가기](https://github.com/NewL1f3/nb4-seven-team6-front)                                                                                 |
+
+## 팀원
+
+| [이상욱](https://github.com/NewL1f3)                                 | [김보경](https://github.com/bgk614)                                 | [엄규리](https://github.com/ammgree)                                 | [박형익](https://github.com/Sw-twt)                                 | [김태회](https://github.com/F-los)                                 |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| <img src="https://avatars.githubusercontent.com/NewL1f3" width="80"> | <img src="https://avatars.githubusercontent.com/bgk614" width="80"> | <img src="https://avatars.githubusercontent.com/ammgree" width="80"> | <img src="https://avatars.githubusercontent.com/Sw-twt" width="80"> | <img src="https://avatars.githubusercontent.com/F-los" width="80"> |
+
 ## 기술 스택
 
+<details>
+<summary>📂 기술 스택 보기</summary>
+<br>
 <table>
   <tr>
     <th>Category</th>
@@ -109,6 +134,7 @@
     <td align="right">10.x</td>
   </tr>
 </table>
+</details>
 
 ## 팀원별 구현 기능 상세
 
